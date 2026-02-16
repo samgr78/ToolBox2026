@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('layouts.app-layout')
+@section('content')
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">
@@ -88,7 +89,7 @@
                         Ajouter une promotion
                     </h3>
                 </div>
-                <div class="card-body flex flex-col gap-5">
+                <div id="store-client-form" class="card-body flex flex-col gap-5">
                     <x-forms.input name="name" :label="__('Nom')" />
 
                     <x-forms.input name="description" :label="__('Description')" />
@@ -105,4 +106,4 @@
         </div>
     </div>
     <!-- end: grid -->
-</x-app-layout>
+@endsection

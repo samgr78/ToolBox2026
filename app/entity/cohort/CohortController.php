@@ -3,6 +3,7 @@
 namespace App\entity\cohort;
 
 use App\Http\Controllers\Controller;
+use App\entity\cohort\Cohort;
 
 class CohortController extends Controller
 {

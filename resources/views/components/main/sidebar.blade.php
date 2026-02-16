@@ -26,7 +26,7 @@
                  data-menu-accordion-expand-all="false" id="sidebar_primary_menu">
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('dashboard') }}">
+                    <!-- route dashboard -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-home-3"></i>
                         </span>
@@ -52,7 +52,7 @@
                         <div class="menu-accordion gap-px ps-7">
                             <div class="menu-item">
                                 <a class="menu-link py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                                   href="{{ route('cohort.index') }}">
+                                <!-- route cohort -->
                                 <span class="menu-title text-2sm text-gray-800 menu-item-active:text-gray-900 menu-link-hover:text-gray-900">
                                     Toutes les promotions
                                 </span>
@@ -81,7 +81,7 @@
 
                     <div class="menu-item">
                         <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                           href="{{ route('student.index') }}">
+                        <!-- route student -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-user-edit"></i>
                         </span>
@@ -93,7 +93,7 @@
 
                     <div class="menu-item">
                         <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                           href="{{ route('teacher.index') }}">
+                        <!-- route teacher -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-security-user"></i>
                         </span>
@@ -111,7 +111,7 @@
                  data-menu-accordion-expand-all="false" id="sidebar_secondary_menu">
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('tasks.index') }}">
+                    <!-- route task -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-abstract-44"></i>
                         </span>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('group.index') }}">
+                    <!-- route groupe -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-abstract-36"></i>
                         </span>
@@ -133,7 +133,7 @@
                 </div>
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('knowledge.index') }}">
+                    <!-- route knowledge -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-devices-2"></i>
                         </span>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="menu-item">
                     <a class="menu-link gap-2.5 py-2 px-2.5 rounded-md border border-transparent menu-item-active:border-gray-200 menu-item-active:bg-light menu-link-hover:bg-light menu-link-hover:border-gray-200"
-                       href="{{ route('retro.index') }}">
+                    <!-- route retro -->
                         <span class="menu-icon items-start text-lg text-gray-600 menu-item-active:text-gray-800 menu-item-here:text-gray-800 menu-item-show:text-gray-800 menu-link-hover:text-gray-800 dark:menu-item-active:text-gray-900 dark:menu-item-here:text-gray-900 dark:menu-item-show:text-gray-900 dark:menu-link-hover:text-gray-900">
                             <i class="ki-filled ki-lovely"></i>
                         </span>
@@ -172,7 +172,7 @@
                                  src="{{ asset('metronic/media/avatars/300-2.png') }}">
                             <div class="flex flex-col gap-1.5">
                                     <span class="text-sm text-gray-800 font-semibold leading-none">
-                                        {{ auth()->user()->short_name }}
+                                        {{ auth()->user()->first_name }}
                                     </span>
                                 <a class="text-xs text-gray-600 font-medium leading-none">
                                     {{ auth()->user()->school()?->name }}
@@ -187,7 +187,7 @@
                     <div class="menu-separator"></div>
                     <div class="flex flex-col">
                         <div class="menu-item">
-                            <a class="menu-link" href="{{ route('profile.edit') }}">
+                            <a class="menu-link" href="{{-- route('profile.edit') --}}">
                                 <span class="menu-icon">
                                     <i class="ki-filled ki-profile-circle"></i>
                                 </span>
@@ -211,10 +211,10 @@
                             </div>
                         </div>
                         <div class="menu-item px-4 py-1.5">
-                            <form method="POST" class="flex flex-col" action="{{ route('logout') }}">
+                            <form method="POST" class="flex flex-col" action="{{-- route('logout') --}}">
                                 @csrf
                                 <a class="btn btn-sm btn-light justify-center"
-                                   href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                   href="{{-- route('logout') --}}" onclick="event.preventDefault();this.closest('form').submit();">
                                     {{ __('Log out') }}
                                 </a>
                             </form>
@@ -245,10 +245,10 @@
                     </div>
                 </div>
             </div>
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{-- route('logout') --}}">
                 @csrf
                 <a class="btn btn-icon btn-icon-lg size-8 hover:bg-light hover:text-primary text-gray-600"
-                   href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                   href="{{-- route('logout') --}}" onclick="event.preventDefault();this.closest('form').submit();">
                     <i class="ki-filled ki-exit-right">
                     </i>
                 </a>

@@ -43,7 +43,7 @@
     }
 </style>
 <div class="flex items-center justify-center grow bg-center bg-no-repeat page-bg">
-    {{ $slot }}
+    @yield('content')
 </div>
 <!-- End of Page -->
 

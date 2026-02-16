@@ -3,14 +3,17 @@
 namespace App\entity\user;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\entity\cohort\Cohort;
+use App\entity\school\School;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +21,8 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'last_name',
+        'first_name',
         'email',
         'password',
     ];
@@ -44,5 +48,61 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * This function returns the full name of the connected user
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return $this->last_name . ' ' . $this->first_name;
+    }
+
+    /**
+     * This function returns the short name of the connected user
+     * @return string
+     */
+    public function getShortNameAttribute(): string
+    {
+        return $this->first_name . ' ' . $this->last_name[0] . '.';
+    }
+
+    /**
+     * Retrieve the school of the user
+     * @return (Model&object)|null
+     */
+    public function school() {
+        // With this, the user can only have 1 school
+        return $this->belongsToMany(School::class, 'users_schools')
+            ->withPivot('role')
+            ->first();
+    }
+
+    /**
+     * Relation Many-to-Many with tasks
+     */
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_user')
+            ->withPivot('completed', 'comment')
+            ->withTimestamps();
+    }
+
+    /**
+     * Relation One-to-Many with assessments
+     */
+    public function assessments()
+    {
+        return $this->hasMany(Assessment::class);
+    }
+
+    /**
+     * Relation Many-to-Many with cohort
+     */
+
+    public function cohorts()
+    {
+        return $this->belongsToMany(Cohort::class, 'cohort_user');
     }
 }

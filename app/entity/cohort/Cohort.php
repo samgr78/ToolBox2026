@@ -33,5 +33,10 @@ class Cohort extends Model
         return $this->belongsToMany(Task::class, 'cohort_task')->withTimestamps();
     }
 
+    public function cohorts()
+    {
+        return $this->hasMany(Cohort::class);
+    }
+
 
 }

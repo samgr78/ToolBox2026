@@ -3,7 +3,7 @@
 use App\entity\cohort\CohortController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('cohort')->name('cohort.')
+Route::middleware(['auth'])->prefix('cohort')->name('cohort.')
     ->controller(CohortController::class)
     ->group(function () {
 

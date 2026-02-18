@@ -1,48 +1,74 @@
-import { sendRequest } from "@/utils/fetch.js";
+import { sendRequest } from "../../utils/fetch.js";
+import { modal } from "../../utils/modal.js";
 
-
-export function initForm() {
-    bindStore();
-    bindUpdate();
+export function initCohortForm() {
+    bindStoreCohort();
+    bindUpdateCohort();
 }
 
 /**
- * Binds the form submission event handler to the form element.
+ * Crée une promotion si `data-cohort-id` n'existe pas
  */
-function bindStore() {
-    const form = document.querySelector('#store-client-form');
+function bindStoreCohort() {
+    const form = document.querySelector('#cohort-form');
+    if (!form) return;
 
-    form?.addEventListener('submit', (event) => {
-        event.preventDefault();
+    form.addEventListener('submit', (e) => {
+        const cohortId = form.dataset.cohortId;
 
-        const formData = new FormData(event.target);
+        if (!cohortId) {
+            e.preventDefault();
+            const formData = new FormData(form);
 
-        sendRequest(route('cohort.store'), 'POST', formData).then((data) => {
-            // si le serveur renvoie redirect, on redirige
-            if (data.redirect) {
-                window.location.href = data.redirect;
-            }
-        });
+            sendRequest('/cohort/store', 'POST', formData)
+                .then(response => {
+                    if (response.redirect) {
+                        window.location.href = response.redirect;
+                    } else {
+                        console.log('Promotion créée', response);
+                        modal('#cohort-drawer').close();
+                        window.location.reload();
+                    }
+                });
+        }
     });
 }
 
 /**
- * Binds the form submission event handler to the form element.
+ * Met à jour une promotion si `data-cohort-id` est défini
  */
-function bindUpdate() {
-    // recupere le formulaire et verifie si le formulaire est envoyé
-    const form = document.querySelector('#update-client-form');
-    form?.addEventListener('submit', (event) => {
-        event.preventDefault();
+function bindUpdateCohort() {
+    const form = document.querySelector('#cohort-form');
+    if (!form) return;
 
-        //on recupere les données du formulaire ainsi que le l'id du client (dans le fichier information.blade)
-        const formData = new FormData(form);
-        const clientId = form.dataset.clientId;
+    form.addEventListener('submit', (e) => {
+        const cohortId = form.dataset.cohortId;
 
-        //envoie vers la route d'update avec les informations
-        sendRequest(route('cohort.update', clientId), 'POST', formData)
-            .then(() => {
-                console.log('notes enregistrés');
-            });
+        if (cohortId) {
+            e.preventDefault();
+            const formData = new FormData(form);
+            formData.append('_method', 'PATCH');
+
+            sendRequest(`/cohort/${cohortId}`, 'POST', formData)
+                .then(() => {
+                    console.log('Promotion mise à jour');
+                    modal('#cohort-drawer').close();
+                    window.location.reload();
+                });
+        }
     });
+}
+
+/**
+ * Remplit le formulaire avec les données existantes
+ */
+export function fillCohortForm(data) {
+    const form = document.querySelector('#cohort-form');
+    if (!form) return;
+
+    form.dataset.cohortId = data.id || null;
+    form.querySelector('[name="name"]').value = data.name || '';
+    form.querySelector('[name="description"]').value = data.description || '';
+    form.querySelector('[name="start_date"]').value = data.start_date || '';
+    form.querySelector('[name="end_date"]').value = data.end_date || '';
 }

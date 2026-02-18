@@ -70,13 +70,12 @@ class User extends Authenticatable
 
     /**
      * Retrieve the school of the user
-     * @return (Model&object)|null
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function school() {
-        // With this, the user can only have 1 school
-        return $this->belongsToMany(School::class, 'users_schools')
-            ->withPivot('role')
-            ->first();
+
+    public function schools() {
+        return $this->belongsToMany(School::class, 'users_schools', 'user_id', 'school_id')
+            ->withPivot('role');
     }
 
     /**
@@ -105,4 +104,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Cohort::class, 'cohort_user');
     }
+
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\entity;
 
+use App\entity\cohort\Cohort;
 use Illuminate\Database\Eloquent\Model;
 
 class CohortUser extends Model

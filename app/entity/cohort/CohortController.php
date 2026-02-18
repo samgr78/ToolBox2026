@@ -8,13 +8,27 @@ use App\entity\cohort\Cohort;
 class CohortController extends Controller
 {
     public function index(){
-        $cohorts = Cohort::all();
+        $cohorts = auth()->user()->cohorts()->first();
         return view('pages.cohorts.index', compact('cohorts'));
     }
 
     public function store(CohortRequest $request, StoreCohortAction $storeAction){
         $dto=CohortDTO::fromRequest($request);
-        $cohort=$storeAction->execute($dto);
-        return $cohort;
+        $storeAction->execute($dto);
+        return response()->json([
+            'success' => true,
+            'redirect' => route('cohort.index')
+        ]);
+    }
+
+    public function update(CohortRequest $request, Cohort $cohort, StoreCohortAction $storeAction)
+    {
+        $dto = CohortDTO::fromRequest($request);
+        $storeAction->execute($dto, $cohort);
+
+        return response()->json([
+            'success' => true,
+            'redirect' => route('cohort.index')
+        ]);
     }
 }

@@ -44,7 +44,7 @@
     <!-- Wrapper -->
     <div class="flex flex-col lg:flex-row grow pt-[--tw-header-height] lg:pt-0">
         <!-- Sidebar -->
-        <x-main.sidebar />
+
         <!-- End of Sidebar -->
 
         <!-- Main -->
@@ -65,7 +65,7 @@
                     <!-- End of Toolbar -->
                     <!-- Container -->
                     <div class="container-fixed">
-                        @yield('slot')
+                        @yield('content')
                     </div>
                     <!-- End of Container -->
                 </main>

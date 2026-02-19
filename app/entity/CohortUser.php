@@ -9,6 +9,8 @@ class CohortUser extends Model
 {
     protected $table = 'cohort_user';
 
+    protected $fillable = ['user_id', 'cohort_id'];
+
     /**
      * Get the user who created or owns this resource.
      */

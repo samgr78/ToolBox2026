@@ -13,9 +13,25 @@ class DefaultUserSchoolSeeder extends Seeder
      */
     public function run(): void
     {
-        UserSchool::create([
-           'user_id'=>1,
-           'school_id'=>1,
-        ]);
+        $userSchools= [
+            [
+                'user_id' => 1,
+                'school_id' => 1,
+                'role'=>'admin',
+            ],
+            [
+                'user_id' => 2,
+                'school_id' => 1,
+                'role'=>'teacher',
+            ],
+            [
+                'user_id' => 3,
+                'school_id' => 1,
+                'role'=>'student',
+            ],
+        ];
+        foreach ($userSchools as $userSchool) {
+            UserSchool::create($userSchool);
+        }
     }
 }

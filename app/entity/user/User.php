@@ -105,5 +105,17 @@ class User extends Authenticatable
         return $this->belongsToMany(Cohort::class, 'cohort_user');
     }
 
+    public function roleInSchool($schoolId)
+    {
+        $school = $this->schools()->where('school_id', $schoolId)->first();
+
+        return $school?->pivot?->role;
+    }
+
+    public function hasRoleInSchool(string $role, int $schoolId): bool
+    {
+        return $this->roleInSchool($schoolId) === $role;
+    }
+
 
 }

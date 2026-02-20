@@ -26,5 +26,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DefaultUserSchoolSeeder::class,
         ]);
+        $this->call([
+            DefaultCohortSeeder::class,
+        ]);
+        $this->call([
+            DefaultCohortUserSeeder::class,
+        ]);
     }
 }

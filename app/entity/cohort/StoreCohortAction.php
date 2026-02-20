@@ -2,6 +2,7 @@
 
 namespace App\entity\cohort;
 
+use App\entity\CohortUser;
 use App\entity\UserSchool;
 
 class StoreCohortAction
@@ -18,6 +19,12 @@ class StoreCohortAction
             'start_date' => $dto->start_date,
             'end_date' => $dto->end_date,
         ]);
+
+        CohortUser::create([
+            'user_id'=> auth()->user()->id,
+            'cohort_id' => $cohort->id,
+        ]);
+
         return $cohort;
     }
 }

@@ -14,13 +14,29 @@ class DefaultUserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::firstOrCreate(
+        $users = [
             [
-                'first_name' => 'userseeder1',
-                'last_name'  => 'lastnameseeder1',
-                'email' => 'userseeder1@gmail.com',
-                'password'   => Hash::make('password'),
-            ]
-        );
+                'first_name' => 'admin1',
+                'last_name' => 'lastnameadmin1',
+                'email' => 'admin1@gmail.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'first_name' => 'teacher1',
+                'last_name' => 'lastnameteacher1',
+                'email' => 'teacher1@gmail.com',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'first_name' => 'student1',
+                'last_name' => 'lastnamestudent1',
+                'email' => 'student@gmail.com',
+                'password' => Hash::make('password'),
+            ],
+        ];
+
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

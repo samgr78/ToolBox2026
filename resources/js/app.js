@@ -49,3 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         import('./components/calendar-init').then(module => module.calendarInit());
     }
 });
+import { openEditDrawer, closeEditDrawer } from './features/cohorts/updateForm.js';
+
+window.openEditDrawer = openEditDrawer;
+window.closeEditDrawer = closeEditDrawer;
+

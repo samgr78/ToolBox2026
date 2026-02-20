@@ -13,7 +13,9 @@
                 <th class="px-6 py-3">Promotion</th>
                 <th class="px-6 py-3">Année</th>
                 <th class="px-6 py-3">Étudiants</th>
-                <th class="px-6 py-3">Actions</th>
+                @can('update', $cohorts->first())
+                    <th class="px-6 py-3">Actions</th>
+                @endcan
             </tr>
             </thead>
 
@@ -45,22 +47,21 @@
 
                     <td class="px-6 py-4 flex gap-2">
 
-                        <button onclick="openEditDrawer('{{ $cohort->id }}', '{{ $cohort->name }}', '{{ e($cohort->description) }}', '{{ \Carbon\Carbon::parse($cohort->start_date)->format('Y-m-d') }}', '{{ \Carbon\Carbon::parse($cohort->end_date)->format('Y-m-d') }}')">
-                            Modifier
-                        </button>
-
-                        <form action="{{ route('cohort.destroy', $cohort->id) }}"
-                              method="POST"
-                              onsubmit="return confirm('Supprimer cette promotion ?')">
-
-                            @csrf
-                            @method('DELETE')
-
-                            <button type="submit"
-                                    class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
-                                Supprimer
+                        @can('update', $cohort)
+                            <button onclick="openEditDrawer('{{ $cohort->id }}', '{{ $cohort->name }}', '{{ e($cohort->description) }}', '{{ \Carbon\Carbon::parse($cohort->start_date)->format('Y-m-d') }}', '{{ \Carbon\Carbon::parse($cohort->end_date)->format('Y-m-d') }}')">
+                                Modifier
                             </button>
-                        </form>
+                        @endcan
+
+                        @can('delete', $cohort)
+                            <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+                                    Supprimer
+                                </button>
+                            </form>
+                        @endcan
 
                     </td>
 

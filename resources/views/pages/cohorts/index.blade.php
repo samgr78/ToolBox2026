@@ -21,8 +21,12 @@
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </div>
-    @include('pages.cohorts.drawers.update-cohort-form')
+    @can('create', App\entity\cohort\Cohort::class)
+        @include('pages.cohorts.drawers.update-cohort-form')
+    @endcan
 
-    @include('pages.cohorts.drawers.cohort-form')
+    @can('create', App\entity\cohort\Cohort::class)
+        @include('pages.cohorts.drawers.cohort-form')
+    @endcan
 
 @endsection

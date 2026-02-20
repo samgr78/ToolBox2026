@@ -15,5 +15,11 @@
         "postcss": "^8.5.6",
         "tailwindcss": "^4.1.18",
         "vite": "^7.0.7"
+    },
+    "dependencies": {
+        "@fullcalendar/core": "^6.1.20",
+        "alpinejs": "^3.15.8",
+        "apexcharts": "^5.6.0",
+        "flatpickr": "^4.6.13"
     }
 }

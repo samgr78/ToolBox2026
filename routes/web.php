@@ -12,3 +12,6 @@ Route::get('/', function () {
 Route::get('/logout', function () {
    auth()->logout();
 });
+Route::get('/dashboard', function () {
+    return view('dashboard.ecommerce');
+});

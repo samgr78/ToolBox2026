@@ -24,6 +24,7 @@ class StoreCohortAction
             'user_id'=> auth()->user()->id,
             'cohort_id' => $cohort->id,
         ]);
+
         return $cohort;
     }
 }

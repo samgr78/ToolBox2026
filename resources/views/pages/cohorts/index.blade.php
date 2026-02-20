@@ -19,7 +19,7 @@
         {{-- Table --}}
         @include('pages.cohorts.tables.cohorts-table')
 
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     </div>
     @can('create', App\entity\cohort\Cohort::class)
         @include('pages.cohorts.drawers.update-cohort-form')

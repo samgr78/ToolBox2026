@@ -6,6 +6,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 require __DIR__.'/web/cohort.php';
 require __DIR__.'/auth.php';
+require __DIR__.'/web/teacher.php';
 
 
 Route::get('/', function () {

@@ -20,18 +20,21 @@ class DefaultUserSeeder extends Seeder
                 'last_name' => 'lastnameadmin1',
                 'email' => 'admin1@gmail.com',
                 'password' => Hash::make('password'),
+                'current_school_id' => 1,
             ],
             [
                 'first_name' => 'teacher1',
                 'last_name' => 'lastnameteacher1',
                 'email' => 'teacher1@gmail.com',
                 'password' => Hash::make('password'),
+                'current_school_id' => 1,
             ],
             [
                 'first_name' => 'student1',
                 'last_name' => 'lastnamestudent1',
                 'email' => 'student@gmail.com',
                 'password' => Hash::make('password'),
+                'current_school_id' => 1,
             ],
         ];
 

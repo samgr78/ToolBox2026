@@ -3,6 +3,7 @@
 namespace App\entity\user;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Builders\UserBuilder;
 use App\entity\cohort\Cohort;
 use App\entity\school\School;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,13 @@ class User extends Authenticatable
         'first_name',
         'email',
         'password',
+        'current_school_id',
     ];
+
+    public function newEloquentBuilder($query){
+        return new UserBuilder($query);
+    }
+
 
     /**
      * The attributes that should be hidden for serialization.

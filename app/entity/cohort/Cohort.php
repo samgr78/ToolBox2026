@@ -2,6 +2,8 @@
 
 namespace App\entity\cohort;
 
+use App\Builders\CohortBuilder;
+use App\entity\school\School;
 use App\entity\user\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +11,11 @@ class Cohort extends Model
 {
     protected $table        = 'cohorts';
     protected $fillable     = ['school_id', 'name', 'description', 'start_date', 'end_date'];
+
+    public function newEloquentBuilder($query)
+    {
+        return new CohortBuilder($query);
+    }
 
     /**
      * Get all assessments associated with this cohort.
@@ -37,6 +44,11 @@ class Cohort extends Model
     public function cohorts()
     {
         return $this->hasMany(Cohort::class);
+    }
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
     }
 
 

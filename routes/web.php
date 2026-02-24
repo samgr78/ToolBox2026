@@ -16,4 +16,4 @@ Route::get('/', function () {
 Route::get('/logout', function () {
    auth()->logout();
 });
-Route::middleware('auth')->get('/dashboard',[DashboardController::class, 'index'])->name('index');
+Route::middleware('auth')->get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');

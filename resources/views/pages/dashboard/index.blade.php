@@ -10,5 +10,9 @@
           @include('pages.dashboard.partials.teacher-table')
       </div>
 
+      <div class="col-span-12 xl:col-span-10 ">
+          @include('pages.dashboard.partials.student-table')
+      </div>
+
   </div>
 @endsection

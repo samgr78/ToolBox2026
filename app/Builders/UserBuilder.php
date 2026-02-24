@@ -13,10 +13,10 @@ class UserBuilder extends Builder
         });
     }
 
-    public function getStudent(int $schoolId){
-        return $this->whereHas('schools', function ($query) use ($schoolId) {
+    public function getUserByRole(int $schoolId, string $role){
+        return $this->whereHas('schools', function ($query) use ($role, $schoolId) {
             $query->where('schools.id', $schoolId)
-                ->where('users_schools.role', 'teacher');
+                ->where('users_schools.role', $role);
         });
     }
 }

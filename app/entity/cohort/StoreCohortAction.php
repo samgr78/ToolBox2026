@@ -10,10 +10,10 @@ class StoreCohortAction
     public function execute(CohortDTO $dto): Cohort
     {
 
-        $school = auth()->user()->schools()->first();
+        $schoolId = auth()->user()->current_school_id;
 
         $cohort = Cohort::create([
-            'school_id'=>$school->id,
+            'school_id'=>$schoolId,
             'name' => $dto->name,
             'description' => $dto->description,
             'start_date' => $dto->start_date,

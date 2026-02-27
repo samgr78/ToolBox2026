@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    @can('create', App\entity\cohort\Cohort::class)
+    @can('create', App\entity\user\User::class)
         @include('pages.teachers.drawers.teacher-form')
     @endcan
 

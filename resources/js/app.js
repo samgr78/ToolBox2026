@@ -19,6 +19,10 @@ Alpine.start();
 
 // Initialize components on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('#cohort-form')) {
+        import('./features/cohorts/form.js').then(module => module.initCohortForm());
+    }
+
     // Map imports
     if (document.querySelector('#mapOne')) {
         import('./components/map').then(module => module.initMap());
@@ -49,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         import('./components/calendar-init').then(module => module.calendarInit());
     }
 });
-import { openEditDrawer, closeEditDrawer } from './features/cohorts/updateForm.js';
+import { openEditDrawer, closeEditDrawer } from './features/cohorts/form.js';
 
 window.openEditDrawer = openEditDrawer;
 window.closeEditDrawer = closeEditDrawer;

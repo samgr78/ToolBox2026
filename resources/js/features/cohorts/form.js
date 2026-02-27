@@ -25,11 +25,15 @@ function bindStoreCohort() {
                     if (response.redirect) {
                         window.location.href = response.redirect;
                     } else {
-                        console.log('Promotion créée', response);
                         modal('#cohort-drawer').close();
                         window.location.reload();
                     }
-                });
+                })
+                .catch(err => {
+                    if (err.status === 422 && err.errors) {
+                        displayValidationErrors(err.errors);
+                    }
+                })
         }
     });
 }
@@ -59,16 +63,25 @@ function bindUpdateCohort() {
     });
 }
 
-/**
- * Remplit le formulaire avec les données existantes
- */
-export function fillCohortForm(data) {
+export function openEditDrawer(id, name, description, start, end) {
+    console.log('openEditDrawer called', id);
     const form = document.querySelector('#cohort-form');
-    if (!form) return;
+    console.log('form found:', form);
+    const m = modal('#cohort-drawer');
+    console.log('modal instance:', m);
+    if (!form || !m) return;
 
-    form.dataset.cohortId = data.id || null;
-    form.querySelector('[name="name"]').value = data.name || '';
-    form.querySelector('[name="description"]').value = data.description || '';
-    form.querySelector('[name="start_date"]').value = data.start_date || '';
-    form.querySelector('[name="end_date"]').value = data.end_date || '';
+    form.dataset.cohortId = id;
+    form.querySelector('[name="name"]').value = name;
+    form.querySelector('[name="description"]').value = description;
+    form.querySelector('[name="start_date"]').value = start;
+    form.querySelector('[name="end_date"]').value = end;
+
+    m.open();
+}
+
+export function closeEditDrawer() {
+    const form = document.querySelector('#cohort-form');
+    if (form) delete form.dataset.cohortId;
+    modal('#cohort-drawer').close();
 }

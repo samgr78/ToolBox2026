@@ -21,9 +21,6 @@
 
 
     </div>
-    @can('create', App\entity\cohort\Cohort::class)
-        @include('pages.cohorts.drawers.update-cohort-form')
-    @endcan
 
     @can('create', App\entity\cohort\Cohort::class)
         @include('pages.cohorts.drawers.cohort-form')

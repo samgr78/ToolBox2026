@@ -3,7 +3,7 @@
         <h3 class="kt-drawer-title">Ajouter une promotion</h3>
     </div>
     <div class="kt-drawer-content kt-scrollable-y">
-        <form id="cohort-form" method="post" action="store">
+        <form id="cohort-form">
             @csrf
             <div class="flex flex-col gap-4">
                 <x-forms.input label="Nom" name="name" type="text" required />

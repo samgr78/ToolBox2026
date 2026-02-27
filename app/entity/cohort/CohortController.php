@@ -4,10 +4,17 @@ namespace App\entity\cohort;
 
 use App\Http\Controllers\Controller;
 use App\entity\cohort\Cohort;
+use App\Queries\UserQuery;
 
 class CohortController extends Controller
 {
     public function index(){
+
+        $students = UserQuery::forSchool(auth()->user()->current_school_id)
+                        ->forRole('student')
+                        ->get();
+
+
         $this->authorize('viewAny', Cohort::class);
         $cohorts = auth()->user()->cohorts()->get();
         return view('pages.cohorts.index', compact('cohorts'));

@@ -17,14 +17,14 @@
             </div>
         </div>
 
+        <div class="lg:col-span-2">
+            @include('pages.cohorts.partials.cohorts-table')
+        </div>
+
         <div class="lg:col-span-1">
             @can('create', App\entity\cohort\Cohort::class)
                 @include('pages.cohorts.drawers.cohort-form')
             @endcan
-        </div>
-
-        <div class="lg:col-span-2">
-            @include('pages.cohorts.partials.cohorts-table')
         </div>
 
     </div>

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+<div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 dark:bg-gray-700">
 
     <h3 class="text-lg font-medium text-gray-800 text-center mb-6">
         Ajouter une promotion

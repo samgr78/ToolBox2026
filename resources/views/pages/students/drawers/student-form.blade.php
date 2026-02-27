@@ -1,21 +1,28 @@
-<div class="kt-drawer kt-drawer-end w-[450px] m-5 rounded-xl border-input" id="student-drawer" data-kt-drawer="true">
-    <div class="kt-drawer-header">
-        <h3 class="kt-drawer-title">Ajouter un étudiant</h3>
-    </div>
-    <div class="kt-drawer-content kt-scrollable-y">
-        <form id="student-form" method="post" action="store">
-            @csrf
-            <div class="flex flex-col gap-4">
-                <x-forms.input label="Nom" name="last_name" type="text" />
-                <x-forms.input label="Prenom" name="first_name" type="text" />
-                <x-forms.input label="Email" name="email" type="email" required />
-                <x-forms.input label="Mot de passe" name="password" type="password" required />
-                <x-forms.input hidden name="role" value="student" />
+<div class="bg-white rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 dark:bg-gray-800">
 
-                <div class="flex justify-end">
-                    <button type="submit" class="kt-btn kt-btn-primary">Valider</button>
-                </div>
+    <h3 class="text-lg font-medium text-gray-800 text-center mb-6 dark:text-white">
+        Ajouter un étudiant 
+    </h3>
+
+    <form id="student-form">
+        @csrf
+
+        <div class="flex flex-col gap-4 max-w-md mx-auto w-full">
+
+            <x-forms.input placeholder="Nom" name="last_name" type="text" required />
+            <x-forms.input placeholder="Prénom" name="first_name" type="text" required />
+            <x-forms.input placeholder="Email" name="email" type="email" required />
+            <x-forms.input placeholder="Mot de passe" name="password" type="password" required />
+            <x-forms.input hidden name="role" value="student" />
+
+            <div class="flex justify-center pt-2">
+                <button type="submit" class="kt-btn kt-btn-primary dark:text-white">
+                    Valider
+                </button>
             </div>
-        </form>
-    </div>
+
+        </div>
+    </form>
+
 </div>
+

@@ -1,34 +1,35 @@
-import { sendRequest } from "../../utils/fetch.js";
-import { modal } from "../../utils/modal.js";
+import {sendRequest} from "../../utils/fetch.js";
 
+console.log('user.js chargé');
 export function initUserForm() {
-    bindStoreUser();
-}
-
-/**
- * Crée un utilisateur si `data-user-id` n'existe pas
- */
-function bindStoreUser() {
     const form = document.querySelector('#user-form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         const userId = form.dataset.userId;
+        const formData = new FormData(form);
 
-        if (!userId) {
-            e.preventDefault();
-            const formData = new FormData(form);
+        let url = '/user/store';
+        let method = 'POST';
 
-            sendRequest('/user/store', 'POST', formData)
-                .then(response => {
-                    if (response.redirect) {
-                        window.location.href = response.redirect;
-                    } else {
-                        console.log('Utilisateur créé', response);
-                        modal('#user-drawer').close();
-                        window.location.reload();
-                    }
-                });
+        if (userId) {
+            url = `/user/${userId}`;
+            formData.append('_method', 'PATCH');
+        }
+
+        try {
+            const response = await sendRequest(url, method, formData);
+
+            if (response.success) {
+                document.querySelector('#users-table tbody').innerHTML += response.html;
+            }
+
+        } catch (err) {
+            if (err.status === 422 && err.errors) {
+                displayValidationErrors(err.errors);
+            }
         }
     });
 }

@@ -25,6 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(module => module.initCohortForm());
     }
 
+    if (document.querySelector('#user-form')) {
+        import('./features/users/form.js')
+            .then(module => module.initUserForm());
+    }
+
     // Map imports
     if (document.querySelector('#mapOne')) {
         import('./components/map').then(module => module.initMap());

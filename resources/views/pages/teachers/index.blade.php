@@ -2,27 +2,31 @@
 
 @section('content')
 
-    <div class="max-w-6xl mx-auto space-y-8">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-        <div class="flex items-center justify-between">
-            <div>
-                <h1 class="text-2xl font-semibold text-gray-900">
-                    Enseignants
-                </h1>
-                <p class="text-sm text-gray-500 mt-1">
-                    Gérez les enseignants de votre école
-                </p>
+        <div class="lg:col-span-3">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                        Enseignants
+                    </h1>
+                    <p class="text-sm text-gray-500 mt-1">
+                        Gérez les enseignants de votre école
+                    </p>
+                </div>
             </div>
         </div>
 
-        {{-- Table --}}
-        @include('pages.teachers.tables.teachers-table')
+        <div class="lg:col-span-2">
+            @include('pages.teachers.partials.teachers-table')
+        </div>
 
-    
+        <div class="lg:col-span-1">
+            @can('create', App\Entity\user\User::class)
+                @include('pages.teachers.drawers.teacher-form')
+            @endcan
+        </div>
+
     </div>
-
-    @can('create', App\entity\user\User::class)
-        @include('pages.teachers.drawers.teacher-form')
-    @endcan
 
 @endsection

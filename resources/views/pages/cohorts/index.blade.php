@@ -1,4 +1,4 @@
-@extends('layouts.app-layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -16,14 +16,14 @@
 
         </div>
 
+        @can('create', App\entity\cohort\Cohort::class)
+            @include('pages.cohorts.drawers.cohort-form')
+        @endcan
+
         {{-- Table --}}
         @include('pages.cohorts.tables.cohorts-table')
 
 
     </div>
-
-    @can('create', App\entity\cohort\Cohort::class)
-        @include('pages.cohorts.drawers.cohort-form')
-    @endcan
 
 @endsection

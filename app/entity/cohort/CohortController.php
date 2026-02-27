@@ -10,9 +10,7 @@ class CohortController extends Controller
 {
     public function index(){
 
-        $students = UserQuery::forSchool(auth()->user()->current_school_id)
-                        ->forRole('student')
-                        ->get();
+
 
 
         $this->authorize('viewAny', Cohort::class);

@@ -18,6 +18,12 @@ class StoreUserAction
             'password' => Hash::make($dto->password),
         ]);
 
+        $role = UserSchool::create([
+            'user_id' => $user->id,
+            'school_id' => $school->id,
+            'role' => $dto->role,
+        ]);
+
         return $user;
     }
 }

@@ -6,10 +6,11 @@
         <form id="teacher-form" method="post" action="store">
             @csrf
             <div class="flex flex-col gap-4">
-                <x-forms.input label="Prenom" name="first_name" type="text" />
                 <x-forms.input label="Nom" name="last_name" type="text" />
+                <x-forms.input label="Prenom" name="first_name" type="text" />
                 <x-forms.input label="Email" name="email" type="email" required />
                 <x-forms.input label="Mot de passe" name="password" type="password" required />
+                <x-forms.input hidden name="role" value="teacher" />
 
                 <div class="flex justify-end">
                     <button type="submit" class="kt-btn kt-btn-primary">Valider</button>

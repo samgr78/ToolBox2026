@@ -14,6 +14,11 @@
                 </p>
             </div>
         </div>
+
+        {{-- Table --}}
+        @include('pages.teachers.tables.teachers-table')
+
+    
     </div>
 
     @can('create', App\entity\user\User::class)

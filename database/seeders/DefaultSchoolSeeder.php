@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\entity\school\School;
-use App\entity\user\User;
+use App\Entity\School\School;
+use App\Entity\User\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

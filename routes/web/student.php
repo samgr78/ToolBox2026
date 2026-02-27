@@ -1,6 +1,6 @@
 <?php
 
-use App\entity\user\Student\StudentController;
+use App\Entity\User\Student\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('student')->name('student.')

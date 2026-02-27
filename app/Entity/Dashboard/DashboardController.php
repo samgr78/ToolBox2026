@@ -1,9 +1,9 @@
 <?php
 
-namespace App\entity\Dashboard;
+namespace App\Entity\Dashboard;
 
-use App\entity\cohort\Cohort;
-use App\entity\user\User;
+use App\Entity\Cohort\Cohort;
+use App\Entity\User\User;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller

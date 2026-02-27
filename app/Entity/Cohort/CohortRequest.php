@@ -1,10 +1,10 @@
 <?php
 
-namespace App\entity\user;
+namespace App\Entity\Cohort;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class userRequest extends FormRequest
+class CohortRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,10 @@ class userRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required | string | max:120',
+            'description' => 'required | string | max:255',
+            'start_date' => 'required | date',
+            'end_date' => 'required | date',
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Queries;
 
-use App\entity\user\User;
+use App\Entity\User\User;
 use Illuminate\Database\Query\Builder;
 
 class UserQuery

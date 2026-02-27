@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\entity\cohort\Cohort;
+use App\Entity\Cohort\Cohort;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

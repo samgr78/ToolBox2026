@@ -1,9 +1,9 @@
 <?php
 
-namespace App\entity\cohort;
+namespace App\Entity\Cohort;
 
 use App\Http\Controllers\Controller;
-use App\entity\cohort\Cohort;
+use App\Entity\Cohort\Cohort;
 use App\Queries\UserQuery;
 
 class CohortController extends Controller

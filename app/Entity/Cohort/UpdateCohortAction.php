@@ -1,9 +1,9 @@
 <?php
 
-namespace App\entity\cohort;
+namespace App\Entity\Cohort;
 
-use App\entity\CohortUser;
-use App\entity\UserSchool;
+use App\Entity\CohortUser;
+use App\Entity\UserSchool;
 
 class UpdateCohortAction
 {

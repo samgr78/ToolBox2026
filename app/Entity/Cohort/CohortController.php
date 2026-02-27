@@ -51,7 +51,9 @@ class CohortController extends Controller
         $this->authorize('delete', $cohort);
         $cohort->delete();
 
-        return redirect()->route('cohort.index')
-            ->with('success', 'Promotion supprimée.');
+        return response()->json([
+            'success' => true,
+            'id' => $cohort->id
+        ]);
     }
 }

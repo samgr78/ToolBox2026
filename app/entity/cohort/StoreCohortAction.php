@@ -7,7 +7,7 @@ use App\entity\UserSchool;
 
 class StoreCohortAction
 {
-    public function execute(CohortDTO $dto): Cohort
+    public function execute(CohortDTO $dto): array
     {
 
         $schoolId = auth()->user()->current_school_id;
@@ -25,6 +25,13 @@ class StoreCohortAction
             'cohort_id' => $cohort->id,
         ]);
 
-        return $cohort;
+        $html = view('pages.cohorts.partials.cohorts-table-row', [
+            'cohort' => $cohort,
+        ])->render();
+
+        return [
+            'html'  => $html,
+            'data'  => $cohort,
+        ];
     }
 }

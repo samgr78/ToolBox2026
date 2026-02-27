@@ -21,7 +21,7 @@
         @endcan
 
         {{-- Table --}}
-        @include('pages.cohorts.tables.cohorts-table')
+        @include('pages.cohorts.partials.cohorts-table')
 
 
     </div>

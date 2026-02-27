@@ -26,11 +26,12 @@ class CohortController extends Controller
 
     public function store(CohortRequest $request, StoreCohortAction $storeAction){
         $this->authorize('create', Cohort::class);
-        $dto=CohortDTO::fromRequest($request);
-        $storeAction->execute($dto);
+        $dto     = CohortDTO::fromRequest($request);
+        $results = $storeAction->execute($dto);
+
         return response()->json([
             'success' => true,
-            'redirect' => route('cohort.index')
+            'html' => $results['html'],
         ]);
     }
 

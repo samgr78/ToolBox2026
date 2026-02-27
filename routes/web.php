@@ -1,6 +1,6 @@
 <?php
 
-use App\entity\Dashboard\DashboardController;
+use App\Entity\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\entity\user\userController;

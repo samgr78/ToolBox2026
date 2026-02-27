@@ -1,9 +1,9 @@
-<div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+<div class="bg-white rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 dark:bg-gray-800">
 
     <!-- Header -->
-    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
         <div>
-            <h3 class="text-lg font-semibold text-gray-800">
+            <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
                 Promotions
             </h3>
             <p class="text-sm text-gray-500">
@@ -20,8 +20,8 @@
     <!-- Table -->
     <div class="overflow-x-auto">
         <table class="w-full text-sm text-left">
-            <thead class="bg-gray-50 text-gray-600 uppercase text-xs">
-            <tr>
+            <thead class="bg-gray-50 dark:bg-gray-800 text-gray-600 uppercase text-xs">
+            <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-white">
                 <th class="px-6 py-3">Nom</th>
                 <th class="px-6 py-3">Date début</th>
                 <th class="px-6 py-3">Date fin</th>
@@ -29,18 +29,18 @@
             </tr>
             </thead>
 
-            <tbody class="divide-y divide-gray-100">
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
             @forelse($cohorts as $cohort)
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 font-medium text-gray-800">
+                <tr class="hover:bg-gray-200 dark:hover:bg-gray-700 transition">
+                    <td class="px-6 py-4 font-medium text-gray-800 dark:text-white">
                         {{ $cohort->name }}
                     </td>
 
-                    <td class="px-6 py-4 text-gray-600">
+                    <td class="px-6 py-4 text-gray-600 dark:text-white">
                         {{ \Carbon\Carbon::parse($cohort->start_date)->format('d/m/Y') }}
                     </td>
 
-                    <td class="px-6 py-4 text-gray-600">
+                    <td class="px-6 py-4 text-gray-600 dark:text-white">
                         {{ \Carbon\Carbon::parse($cohort->end_date)->format('d/m/Y') }}
                     </td>
 

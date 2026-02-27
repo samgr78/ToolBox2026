@@ -1,6 +1,6 @@
 <?php
 
-namespace App\entity\user;
+namespace App\Entity\User;
 
 use Illuminate\Support\Facades\Hash;
 

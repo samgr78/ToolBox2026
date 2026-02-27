@@ -1,7 +1,6 @@
 <?php
 
-use App\entity\user\Teacher\TeacherController;
-use App\entity\user\UserController;
+use App\Entity\User\Teacher\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('teacher')->name('teacher.')

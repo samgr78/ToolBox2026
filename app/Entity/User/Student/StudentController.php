@@ -1,6 +1,6 @@
 <?php
 
-namespace App\entity\user\Student;
+namespace App\Entity\User\Student;
 
 use App\Http\Controllers\Controller;
 

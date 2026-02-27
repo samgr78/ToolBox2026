@@ -1,6 +1,6 @@
 <?php
 
-use App\entity\cohort\CohortController;
+use App\Entity\Cohort\CohortController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('cohort')->name('cohort.')

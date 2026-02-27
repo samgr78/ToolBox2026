@@ -1,13 +1,18 @@
 <?php
 
-namespace App\entity\cohort;
+namespace App\Entity\Cohort;
 
 use App\Http\Controllers\Controller;
-use App\entity\cohort\Cohort;
+use App\Entity\Cohort\Cohort;
+use App\Queries\UserQuery;
 
 class CohortController extends Controller
 {
     public function index(){
+
+
+
+
         $this->authorize('viewAny', Cohort::class);
         $cohorts = auth()->user()->cohorts()->get();
         return view('pages.cohorts.index', compact('cohorts'));
@@ -21,11 +26,12 @@ class CohortController extends Controller
 
     public function store(CohortRequest $request, StoreCohortAction $storeAction){
         $this->authorize('create', Cohort::class);
-        $dto=CohortDTO::fromRequest($request);
-        $storeAction->execute($dto);
+        $dto     = CohortDTO::fromRequest($request);
+        $results = $storeAction->execute($dto);
+
         return response()->json([
             'success' => true,
-            'redirect' => route('cohort.index')
+            'html' => $results['html'],
         ]);
     }
 

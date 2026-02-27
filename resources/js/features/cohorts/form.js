@@ -1,74 +1,35 @@
-import { sendRequest } from "../../utils/fetch.js";
-import { modal } from "../../utils/modal.js";
+import {sendRequest} from "../../utils/fetch.js";
 
+console.log('cohort.js chargé');
 export function initCohortForm() {
-    bindStoreCohort();
-    bindUpdateCohort();
-}
-
-/**
- * Crée une promotion si `data-cohort-id` n'existe pas
- */
-function bindStoreCohort() {
     const form = document.querySelector('#cohort-form');
     if (!form) return;
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
         const cohortId = form.dataset.cohortId;
+        const formData = new FormData(form);
 
-        if (!cohortId) {
-            e.preventDefault();
-            const formData = new FormData(form);
-
-            sendRequest('/cohort/store', 'POST', formData)
-                .then(response => {
-                    if (response.redirect) {
-                        window.location.href = response.redirect;
-                    } else {
-                        console.log('Promotion créée', response);
-                        modal('#cohort-drawer').close();
-                        window.location.reload();
-                    }
-                });
-        }
-    });
-}
-
-/**
- * Met à jour une promotion si `data-cohort-id` est défini
- */
-function bindUpdateCohort() {
-    const form = document.querySelector('#cohort-form');
-    if (!form) return;
-
-    form.addEventListener('submit', (e) => {
-        const cohortId = form.dataset.cohortId;
+        let url = '/cohort/store';
+        let method = 'POST';
 
         if (cohortId) {
-            e.preventDefault();
-            const formData = new FormData(form);
+            url = `/cohort/${cohortId}`;
             formData.append('_method', 'PATCH');
+        }
 
-            sendRequest(`/cohort/${cohortId}`, 'POST', formData)
-                .then(() => {
-                    console.log('Promotion mise à jour');
-                    modal('#cohort-drawer').close();
-                    window.location.reload();
-                });
+        try {
+            const response = await sendRequest(url, method, formData);
+
+            if (response.success) {
+                document.querySelector('#cohorts-table tbody').innerHTML += response.html;
+            }
+
+        } catch (err) {
+            if (err.status === 422 && err.errors) {
+                displayValidationErrors(err.errors);
+            }
         }
     });
-}
-
-/**
- * Remplit le formulaire avec les données existantes
- */
-export function fillCohortForm(data) {
-    const form = document.querySelector('#cohort-form');
-    if (!form) return;
-
-    form.dataset.cohortId = data.id || null;
-    form.querySelector('[name="name"]').value = data.name || '';
-    form.querySelector('[name="description"]').value = data.description || '';
-    form.querySelector('[name="start_date"]').value = data.start_date || '';
-    form.querySelector('[name="end_date"]').value = data.end_date || '';
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\entity;
+namespace App\Entity;
 
-use App\entity\cohort\Cohort;
+use App\Entity\Cohort\Cohort;
 use Illuminate\Database\Eloquent\Model;
 
 class CohortUser extends Model

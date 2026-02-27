@@ -1,6 +1,6 @@
 <?php
 
-namespace App\entity\cohort;
+namespace App\Entity\Cohort;
 
 use Illuminate\Foundation\Http\FormRequest;
 

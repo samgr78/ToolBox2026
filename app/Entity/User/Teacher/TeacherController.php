@@ -1,6 +1,6 @@
 <?php
 
-namespace App\entity\user\Teacher;
+namespace App\Entity\User\Teacher;
 
 use App\Http\Controllers\Controller;
 

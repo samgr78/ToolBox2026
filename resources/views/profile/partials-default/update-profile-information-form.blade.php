@@ -1,77 +1,84 @@
-<section>
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Profile Information') }}
-        </h2>
+<form method="post" action="{{ route('profile.update') }}">
+    @csrf
+    @method('patch')
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
-        </p>
-    </header>
-
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-        @csrf
-    </form>
-
-    <form method="post" action="{{ route('profile.update') }}" class="card-body flex flex-col gap-5 p-10">
-        @csrf
-        @method('patch')
-
-        <div>
-            <x-forms.input
-                label="{{ __('Name') }}"
-                name="name"
-                type="text"
-                :value="old('name', $user->name)"
-                required
-                autofocus
-                :messages="$errors->get('name')"
-            />
+    <div class="card" id="basic_settings">
+        <div class="card-header">
+            <div>
+                <h3 class="card-title text-gray-800 dark:text-white/90">
+                    Profile Information
+                </h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                    Update your personal information.
+                </p>
+            </div>
         </div>
 
-        <div>
-            <x-forms.input
-                label="{{ __('Email') }}"
-                name="email"
-                type="email"
-                :value="old('email', $user->email)"
-                required
-                :messages="$errors->get('email')"
-            />
+        <div class="card-body flex flex-col gap-6 p-5 sm:p-6">
+            <div class="flex flex-col gap-2 xl:flex-row xl:items-start xl:gap-6">
+                <label for="first_name" class="w-full xl:max-w-56 pt-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    First Name
+                </label>
 
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                <div class="w-full flex-1">
+                    <input
+                        id="first_name"
+                        name="first_name"
+                        type="text"
+                        value="{{ old('first_name', $user->first_name) }}"
+                        required
+                        autofocus
+                        class="input w-full"
+                    >
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
-
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                    @if ($errors->has('first_name'))
+                        <p class="mt-2 text-sm text-error-500">
+                            {{ $errors->first('first_name') }}
                         </p>
                     @endif
                 </div>
-            @endif
-        </div>
+            </div>
 
-        <div class="flex items-center gap-4 mt-6">
-            <x-forms.primary-button>
-                {{ __('Save') }}
-            </x-forms.primary-button>
+            <div class="flex flex-col gap-2 xl:flex-row xl:items-start xl:gap-6">
+                <label for="last_name" class="w-full xl:max-w-56 pt-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Last Name
+                </label>
 
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
+                <div class="w-full flex-1">
+                    <input
+                        id="last_name"
+                        name="last_name"
+                        type="text"
+                        value="{{ old('last_name', $user->last_name) }}"
+                        required
+                        class="input w-full"
+                    >
+
+                    @if ($errors->has('last_name'))
+                        <p class="mt-2 text-sm text-error-500">
+                            {{ $errors->first('last_name') }}
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 border-t border-gray-200 pt-4 dark:border-gray-800">
+                @if (session('status') === 'profile-updated')
+                    <p
+                        x-data="{ show: true }"
+                        x-show="show"
+                        x-transition
+                        x-init="setTimeout(() => show = false, 2000)"
+                        class="text-sm text-success-600 dark:text-success-500"
+                    >
+                        Saved.
+                    </p>
+                @endif
+
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+            </div>
         </div>
-    </form>
-</section>
+    </div>
+</form>

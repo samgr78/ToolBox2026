@@ -1,55 +1,54 @@
-<section class="space-y-6">
-    <header>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Delete Account') }}
-        </h2>
+<form method="post" action="{{ route('profile.destroy') }}">
+    @csrf
+    @method('delete')
 
-        <p class="mt-1 text-sm text-gray-600">
-            {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
-        </p>
-    </header>
+    <div class="card" id="delete_account">
+        <div class="card-header">
+            <h3 class="card-title">
+                Delete Account
+            </h3>
+        </div>
 
-    <x-danger-button
-        x-data=""
-        x-on:click.prevent="$dispatch('open-modal', 'confirm-user-deletion')"
-    >{{ __('Delete Account') }}</x-danger-button>
-
-    <x-modal name="confirm-user-deletion" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6">
-            @csrf
-            @method('delete')
-
-            <h2 class="text-lg font-medium text-gray-900">
-                {{ __('Are you sure you want to delete your account?') }}
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your account.') }}
-            </p>
-
-            <div class="mt-6">
-                <x-input-label for="password" value="{{ __('Password') }}" class="sr-only" />
-
-                <x-text-input
-                    id="password"
-                    name="password"
-                    type="password"
-                    class="mt-1 block w-3/4"
-                    placeholder="{{ __('Password') }}"
-                />
-
-                <x-input-error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+        <div class="card-body grid gap-5">
+            <div class="w-full">
+                <p class="text-sm text-gray-600">
+                    Once your account is deleted, all of its resources and data will be permanently deleted.
+                    Please enter your password to confirm this action.
+                </p>
             </div>
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+            <div class="w-full">
+                <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
+                    <label class="form-label max-w-56">
+                        Password
+                    </label>
 
-                <x-danger-button class="ms-3">
-                    {{ __('Delete Account') }}
-                </x-danger-button>
+                    <div class="flex flex-col grow gap-2 w-full">
+                        <input
+                            name="password"
+                            class="input w-full"
+                            placeholder="Enter your password"
+                            type="password"
+                        >
+
+                        @if ($errors->userDeletion->has('password'))
+                            <p class="text-sm text-red-600">
+                                {{ $errors->userDeletion->first('password') }}
+                            </p>
+                        @endif
+                    </div>
+                </div>
             </div>
-        </form>
-    </x-modal>
-</section>
+
+            <div class="flex justify-end pt-2.5">
+                <button
+                    type="submit"
+                    class="btn btn-danger"
+                    onclick="return confirm('Are you sure you want to delete your account?')"
+                >
+                    Delete Account
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

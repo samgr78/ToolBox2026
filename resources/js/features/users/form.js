@@ -10,6 +10,7 @@ export function initUserForm() {
 
         const userId = form.dataset.userId;
         const formData = new FormData(form);
+        const role =form.dataset.role;
 
         let url = '/user/store';
         let method = 'POST';
@@ -28,7 +29,7 @@ export function initUserForm() {
 
         } catch (err) {
             if (err.status === 422 && err.errors) {
-                displayValidationErrors(err.errors);
+                //displayValidationErrors(err.errors);
             }
         }
     });

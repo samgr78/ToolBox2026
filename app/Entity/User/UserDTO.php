@@ -2,7 +2,7 @@
 
 namespace App\Entity\User;
 
-readonly class userDTO
+readonly class UserDTO
 {
     public function __construct(
         public string $last_name,
@@ -13,7 +13,7 @@ readonly class userDTO
     ) {
     }
 
-    public static function fromRequest(userRequest $request): userDTO
+    public static function fromRequest(userRequest $request): UserDTO
     {
         return new self(
             last_name: $request->input('last_name'),

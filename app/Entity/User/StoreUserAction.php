@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Entity\UserSchool;
 use Illuminate\Support\Facades\Hash;
 
 class StoreUserAction

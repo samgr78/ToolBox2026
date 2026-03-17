@@ -28,7 +28,7 @@ export function initCohortForm() {
 
         } catch (err) {
             if (err.status === 422 && err.errors) {
-                displayValidationErrors(err.errors);
+                //displayValidationErrors(err.errors);
             }
         }
     });

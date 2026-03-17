@@ -6,6 +6,13 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+    public function show(User $user)
+    {
+        $this->authorize('view', $user);
+        return view('pages.users.show', compact('user'));
+    }
+
     public function store(userRequest $request, StoreUserAction $action)
     {
         $dto = UserDTO::fromRequest($request);
@@ -13,7 +20,14 @@ class UserController extends Controller
 
         return response()->json([
             'user' => $user,
-            //'redirect' => route('pages.teachers.index'),
         ]);
+    }
+
+    public function destroy(User $user){
+        $this->authorize('delete', $user);
+        $user->delete();
+
+        return redirect()->route('user.index')
+            ->with('success', 'Utilisateur supprimé.');
     }
 }

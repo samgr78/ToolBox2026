@@ -32,4 +32,5 @@ class UserPolicy
     {
         return $user->schools()->wherePivot('role', 'admin')->exists();
     }
+
 }    

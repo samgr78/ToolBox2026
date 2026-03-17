@@ -10,7 +10,6 @@ require __DIR__.'/auth.php';
 require __DIR__.'/web/user.php';
 require __DIR__.'/web/teacher.php';
 require __DIR__.'/web/student.php';
-require __DIR__.'/web/user.php';
 
 Route::get('/', function () {
     return view('auth.login');

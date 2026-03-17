@@ -1,37 +1,43 @@
-<div class="bg-white rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden dark:bg-gray-800">
+<tr class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
+    <td class="px-6 py-4">
+        <div>
+            <a href="{{ route('user.show', $user->id) }}"
+               class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->last_name }}
+            </a>
+        </div>
+    </td>
 
-    <div class="px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-        <h3 class="text-lg font-medium text-gray-800 dark:text-white">
-            Mes étudiants
-        </h3>
-    </div>
+    <td class="px-6 py-4">
+        <div>
+            <a class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->first_name }}
+            </a>
+        </div>
+    </td>
 
-    <div class="overflow-x-auto">
-        <table id="students-table" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead class="bg-gray-50 dark:bg-gray-800">
-            <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-white">
-                <th class="px-6 py-3">Nom</th>
-                <th class="px-6 py-3">Prénom</th>
-                <th class="px-6 py-3">Email</th>
-                @can('update', $students->first())
-                    <th class="px-6 py-3">Actions</th>
-                @endcan
-            </tr>
-            </thead>
+    <td class="px-6 py-4">
+        <div>
+            <a class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->email }}
+            </a>
+        </div>
+    </td>
 
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
+    <td class="px-6 py-4 flex gap-2">
 
-            @forelse($students as $student)
-                @include('pages.students.partials.students-table-row')
-            @empty
-                <tr>
-                    <td colspan="3" class="px-6 py-12 text-center text-gray-400">
-                        Aucun étudiant pour le moment.
-                    </td>
-                </tr>
-            @endforelse
+            <button onclick="openEditDrawer('{{ $user->id }}', '{{ $user->last_name }}', '{{ $user->first_name }}', '{{ $user->email }}',)">
+                Modifier
+            </button>
+        
+            <form action="{{ route('user.destroy', $user->id) }}" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+                    Supprimer
+                </button>
+            </form>
 
-            </tbody>
-        </table>
-    </div>
-</div>
+    </td>
+
+</tr>

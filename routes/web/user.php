@@ -7,5 +7,7 @@ Route::middleware(['auth'])->prefix('user')->name('user.')
     ->controller(UserController::class)
     ->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/{user}', 'show')->name('show');
         Route::post('/store', [UserController::class, 'store'])->name('store');
+        Route::delete('/{user}', 'destroy')->name('destroy');
     });

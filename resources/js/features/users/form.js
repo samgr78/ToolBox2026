@@ -10,7 +10,7 @@ export function initUserForm() {
 
         const userId = form.dataset.userId;
         const formData = new FormData(form);
-        const role =form.dataset.role;
+        const role = form.dataset.role;
 
         let url = '/user/store';
         let method = 'POST';

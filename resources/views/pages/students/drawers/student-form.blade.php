@@ -4,7 +4,7 @@
         Ajouter un étudiant 
     </h3>
 
-    <form id="student-form">
+    <form id="user-form">
         @csrf
 
         <div class="flex flex-col gap-4 max-w-md mx-auto w-full">

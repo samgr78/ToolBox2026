@@ -34,11 +34,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user){
-        $this->authorize('delete', $user);
-        $user->delete();
+    public function destroy(User $user)
+{
+    $this->authorize('delete', $user);
+    $user->delete();
 
-        return redirect()->route('user.index')
-            ->with('success', 'Utilisateur supprimé.');
-    }
+    return redirect()->back()->with('success', 'Utilisateur supprimé.');
+}
 }

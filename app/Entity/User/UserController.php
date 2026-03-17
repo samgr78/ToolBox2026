@@ -13,7 +13,7 @@ class UserController extends Controller
 
         return response()->json([
             'user' => $user,
-            'redirect' => route('pages.teachers.index'),
+            //'redirect' => route('pages.teachers.index'),
         ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-use App\entity\user\UserController;
+use App\Entity\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('user')->name('user.')

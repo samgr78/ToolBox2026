@@ -53,9 +53,5 @@ document.addEventListener('DOMContentLoaded', () => {
         import('./components/chart/chart-13').then(module => module.initChartThirteen());
     }
 
-    // Calendar init
-    if (document.querySelector('#calendar')) {
-        import('./components/calendar-init').then(module => module.calendarInit());
-    }
 });
 

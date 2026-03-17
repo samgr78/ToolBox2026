@@ -23,6 +23,17 @@ class UserController extends Controller
         ]);
     }
 
+    public function update(UserRequest $request, UpdateUserAction $action, User $user)
+    {
+        $dto = UserDTO::fromRequest($request);
+        $user = $action->execute($dto, $user);
+
+        return response()->json([
+            'success' => true,
+            'user' => $user,
+        ]);
+    }
+
     public function destroy(User $user){
         $this->authorize('delete', $user);
         $user->delete();

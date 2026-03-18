@@ -25,6 +25,20 @@ class StoreUserAction
             'role' => $dto->role,
         ]);
 
-        return $user;
+        if ($dto->role === 'student') {
+            $html = view('pages.students.partials.students-table-row', [
+                'user' => $user,
+            ])->render();
+        } 
+        else ($dto->role === 'teacher') {
+            $html = view('pages.teachers.partials.teachers-table-row', [
+                'user' => $user,
+            ])->render();
+        }
+
+        return [
+            'html'  => $html,
+            'data'  => $user,
+        ];
     }
 }

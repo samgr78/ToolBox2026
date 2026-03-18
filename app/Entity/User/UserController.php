@@ -19,7 +19,8 @@ class UserController extends Controller
         $user = $action->execute($dto);
 
         return response()->json([
-            'user' => $user,
+            'success' => true,
+            'html' => $results['html'],
         ]);
     }
 

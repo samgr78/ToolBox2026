@@ -36,11 +36,13 @@ class UserController extends Controller
     }
 
     public function destroy(User $user)
-{
-    $this->authorize('delete', $user);
-    $user->schools()->detach();
-    $user->delete();
+    {
+        $this->authorize('delete', $user);
+        $user->schools()->detach();
+        $user->delete();
 
-    return redirect()->back()->with('success', 'Utilisateur supprimé.');
-}
+        return response()->json([
+            'success' => true,
+        ]);
+    }
 }

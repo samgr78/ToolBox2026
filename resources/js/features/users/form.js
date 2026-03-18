@@ -11,6 +11,38 @@ function attachEditListener(btn, form) {
     });
 }
 
+function attachDeleteListener(btn) {
+    btn.addEventListener('click', async () => {
+        if (!confirm('Supprimer cet utilisateur ?')) return;
+
+        const { id, url } = btn.dataset;
+
+        try {
+            const formData = new FormData();
+            formData.append('_method', 'DELETE');
+
+            const response = await sendRequest(url, 'POST', formData);
+
+            if (response.success) {
+                const row = document.querySelector(`#users-table tr[data-user-id="${id}"]`);
+                if (row) row.remove();
+
+                const tbody = document.querySelector('#users-table tbody');
+                if (tbody && !tbody.querySelector('tr')) {
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="px-6 py-12 text-center text-gray-400">
+                                Aucun enseignant pour le moment.
+                            </td>
+                        </tr>`;
+                }
+            }
+        } catch (err) {
+            console.error('Erreur suppression:', err);
+        }
+    });
+}
+
 function updateTableRow(html, form) {
     const userId = form.dataset.userId;
 
@@ -25,6 +57,8 @@ function updateTableRow(html, form) {
     const newRow = tbody.querySelector(`tr[data-user-id="${userId}"]`);
     const editBtn = newRow?.querySelector('.edit-user-btn');
     if (editBtn) attachEditListener(editBtn, form);
+    const deleteBtn = newRow?.querySelector('.delete-user-btn');
+    if (deleteBtn) attachDeleteListener(deleteBtn);
 }
 
 export function initUserForm() {
@@ -33,6 +67,10 @@ export function initUserForm() {
 
     document.querySelectorAll('.edit-user-btn').forEach(btn => {
         attachEditListener(btn, form);
+    });
+
+    document.querySelectorAll('.delete-user-btn').forEach(btn => {
+        attachDeleteListener(btn);
     });
 
     form.addEventListener('submit', async (e) => {
@@ -63,8 +101,11 @@ export function initUserForm() {
 
                     tbody.insertAdjacentHTML('beforeend', response.html);
 
-                    const newEditBtn = tbody.lastElementChild.querySelector('.edit-user-btn');
+                    const newRow = tbody.lastElementChild;
+                    const newEditBtn = newRow.querySelector('.edit-user-btn');
                     if (newEditBtn) attachEditListener(newEditBtn, form);
+                    const newDeleteBtn = newRow.querySelector('.delete-user-btn');
+                    if (newDeleteBtn) attachDeleteListener(newDeleteBtn);
                 }
 
                 form.reset();

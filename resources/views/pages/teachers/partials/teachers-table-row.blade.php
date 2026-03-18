@@ -37,15 +37,14 @@
             Modifier
         </button>
 
-    @can('delete', $user)    
-        <form action="{{ route('user.destroy', $user) }}" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+        @can('delete', $user)
+            <button type="button"
+                    class="delete-user-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200"
+                    data-id="{{ $user->id }}"
+                    data-url="{{ route('user.destroy', $user) }}">
                 Supprimer
             </button>
-        </form>
-    @endcan    
+        @endcan
 
     </td>
 </tr>

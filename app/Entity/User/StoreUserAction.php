@@ -4,10 +4,11 @@ namespace App\Entity\User;
 
 use App\Entity\UserSchool;
 use Illuminate\Support\Facades\Hash;
+use Nette\Utils\ArrayList;
 
 class StoreUserAction
 {
-    public function execute(UserDTO $dto): User
+    public function execute(UserDTO $dto): array
     {
 
         $school = auth()->user()->schools()->first();
@@ -29,8 +30,8 @@ class StoreUserAction
             $html = view('pages.students.partials.students-table-row', [
                 'user' => $user,
             ])->render();
-        } 
-        else ($dto->role === 'teacher') {
+        }
+        else{
             $html = view('pages.teachers.partials.teachers-table-row', [
                 'user' => $user,
             ])->render();

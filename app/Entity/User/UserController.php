@@ -16,22 +16,22 @@ class UserController extends Controller
     public function store(userRequest $request, StoreUserAction $action)
     {
         $dto = UserDTO::fromRequest($request);
-        $user = $action->execute($dto);
+        $result = $action->execute($dto);
 
         return response()->json([
             'success' => true,
-            'html' => $results['html'],
+            'html' => $result['html'],
         ]);
     }
 
     public function update(UserRequest $request, UpdateUserAction $action, User $user)
     {
         $dto = UserDTO::fromRequest($request);
-        $user = $action->execute($dto, $user);
+        $result = $action->execute($dto, $user);
 
         return response()->json([
             'success' => true,
-            'user' => $user,
+            'user' => $result,
         ]);
     }
 

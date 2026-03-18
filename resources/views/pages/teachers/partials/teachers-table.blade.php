@@ -7,7 +7,7 @@
     </div>
 
     <div class="overflow-x-auto">
-        <table id="teachers-table" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <table id="users-table" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
             <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-white">
                 <th class="px-6 py-3">Nom</th>
@@ -17,7 +17,7 @@
             </thead>
 
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
-            
+
             @forelse($users as $user)
                 @include('pages.teachers.partials.teachers-table-row')
             @empty

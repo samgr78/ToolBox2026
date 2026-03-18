@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'email'      => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($userId)],
             'password'   => [$userId ? 'nullable' : 'required', 'string', 'min:4'],
-            'role'       => ['required', 'string', 'in:student,teacher,admin'],
+            'role' => [$userId ? 'nullable' : 'required', 'string', 'in:student,teacher,admin'],
         ];
     }
 }

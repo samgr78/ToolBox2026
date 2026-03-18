@@ -5,11 +5,13 @@ namespace App\Entity\User;
 use App\Entity\UserSchool;
 use Illuminate\Support\Facades\Hash;
 use Nette\Utils\ArrayList;
+use app\Queries\UserQuery;
 
 class StoreUserAction
 {
     public function execute(UserDTO $dto): array
     {
+
 
         $school = auth()->user()->schools()->first();
 

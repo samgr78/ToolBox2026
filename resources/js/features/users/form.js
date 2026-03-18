@@ -2,14 +2,29 @@ import { sendRequest } from "../../utils/fetch.js";
 
 function attachEditListener(btn, form) {
     btn.addEventListener('click', () => {
-        const { id, lastName, firstName, email, password } = btn.dataset;
+        const { id, lastName, firstName, email } = btn.dataset;
 
         form.querySelector('[name="last_name"]').value = lastName;
         form.querySelector('[name="first_name"]').value = firstName;
         form.querySelector('[name="email"]').value = email;
-        form.querySelector('[name="password"]').value = password;
         form.dataset.userId = id;
     });
+}
+
+function updateTableRow(html, form) {
+    const userId = form.dataset.userId;
+
+    const tbody = document.querySelector('#users-table tbody');
+    const existingRow = tbody.querySelector(`tr[data-user-id="${userId}"]`);
+
+    if (!existingRow) return;
+
+    existingRow.insertAdjacentHTML('afterend', html);
+    existingRow.remove();
+
+    const newRow = tbody.querySelector(`tr[data-user-id="${userId}"]`);
+    const editBtn = newRow?.querySelector('.edit-user-btn');
+    if (editBtn) attachEditListener(editBtn, form);
 }
 
 export function initUserForm() {
@@ -23,14 +38,14 @@ export function initUserForm() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const userId= form.dataset.userId;
-        const formData= new FormData(form);
+        const userId   = form.dataset.userId;
+        const formData = new FormData(form);
 
-        let url= '/user/store';
-        let method= 'POST';
+        let url    = '/user/store';
+        let method = 'POST';
 
         if (userId) {
-            url = `/user/${userId}/update`;
+            url    = `/user/${userId}/update`;
             method = 'POST';
             formData.append('_method', 'PATCH');
         }
@@ -40,16 +55,14 @@ export function initUserForm() {
 
             if (response.success) {
                 if (userId) {
-                    updateTableRow(response.user);
+                    updateTableRow(response.user, form);
                 } else {
                     const tbody = document.querySelector('#users-table tbody');
-
                     const emptyRow = tbody.querySelector('td[colspan]')?.closest('tr');
                     if (emptyRow) emptyRow.remove();
 
                     tbody.insertAdjacentHTML('beforeend', response.html);
 
-                    //attacher le listener sur la nouvelle ligne
                     const newEditBtn = tbody.lastElementChild.querySelector('.edit-user-btn');
                     if (newEditBtn) attachEditListener(newEditBtn, form);
                 }

@@ -4,12 +4,12 @@ namespace App\Entity\User\Student;
 
 use App\Http\Controllers\Controller;
 use App\Entity\User\User;
+use App\Queries\UserQuery;
 
 class StudentController extends Controller
 {
     public function index(){
-        $users = User::whereHas('schools', fn($q) => $q->where('role', 'student'))->get();
+        $users = UserQuery::forSchool(auth()->user()->current_school_id)->forRole('student')->get();
         return view('pages.students.index', compact('users'));
     }
-
 }

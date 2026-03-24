@@ -12,7 +12,8 @@ class CohortController extends Controller
     public function index(){
 
         $this->authorize('viewAny', Cohort::class);
-        $cohorts = auth()->user()->cohorts()->get();
+        //$cohorts = auth()->user()->cohorts()->get();
+        $cohorts = CohortQuery::
         return view('pages.cohorts.index', compact('cohorts'));
     }
 

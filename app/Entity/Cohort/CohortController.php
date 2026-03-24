@@ -10,9 +10,6 @@ class CohortController extends Controller
 {
     public function index(){
 
-
-
-
         $this->authorize('viewAny', Cohort::class);
         $cohorts = auth()->user()->cohorts()->get();
         return view('pages.cohorts.index', compact('cohorts'));

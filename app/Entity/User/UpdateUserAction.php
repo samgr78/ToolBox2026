@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Entity\User;
+
+use Illuminate\Support\Facades\Hash;
+
+class UpdateUserAction
+{
+    public function execute(UserDTO $dto, User $user): array
+    {
+        $data = [
+            'last_name'  => $dto->last_name,
+            'first_name' => $dto->first_name,
+            'email'      => $dto->email,
+        ];
+
+        if ($dto->password) {
+            $data['password'] = Hash::make($dto->password);
+        }
+
+        $user->update($data);
+
+        if ($dto->role) {
+            $user->schools()->updateExistingPivot($user->current_school_id, [
+                'role' => $dto->role,
+            ]);
+        }
+
+        $user->refresh();
+
+        if ($user->role === 'student') {
+            $html = view('pages.students.partials.students-table-row', [
+                'user' => $user,
+            ])->render();
+        } else {
+            $html = view('pages.teachers.partials.teachers-table-row', [
+                'user' => $user,
+            ])->render();
+        }
+
+        return [
+            'html' => $html,
+            'data' => $user,
+        ];
+    }
+}

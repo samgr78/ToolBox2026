@@ -3,7 +3,7 @@
 namespace App\Queries;
 
 use App\Entity\User\User;
-use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserQuery
 {

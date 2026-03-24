@@ -8,8 +8,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 // FullCalendar
 import { Calendar } from '@fullcalendar/core';
 
-
-
 window.Alpine = Alpine;
 window.ApexCharts = ApexCharts;
 window.flatpickr = flatpickr;
@@ -23,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('#cohort-form')) {
         import('./features/cohorts/form.js')
             .then(module => module.initCohortForm());
+    }
+
+    if (document.querySelector('#user-form')) {
+        import('./features/users/form.js')
+            .then(module => module.initUserForm());
     }
 
     if(document.querySelector('.cohort-delete-form')){
@@ -55,9 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
         import('./components/chart/chart-13').then(module => module.initChartThirteen());
     }
 
-    // Calendar init
-    if (document.querySelector('#calendar')) {
-        import('./components/calendar-init').then(module => module.calendarInit());
-    }
 });
 

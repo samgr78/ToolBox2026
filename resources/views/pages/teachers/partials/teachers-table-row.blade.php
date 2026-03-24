@@ -1,0 +1,50 @@
+<tr data-user-id="{{ $user->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
+    <td class="px-6 py-4">
+        <div>
+            <a href="{{ route('user.show', $user->id) }}"
+               data-field="last_name"
+               class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->last_name }}
+            </a>
+        </div>
+    </td>
+
+    <td class="px-6 py-4">
+        <div>
+            <a data-field="first_name"
+               class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->first_name }}
+            </a>
+        </div>
+    </td>
+
+    <td class="px-6 py-4">
+        <div>
+            <a data-field="email"
+               class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                {{ $user->email }}
+            </a>
+        </div>
+    </td>
+
+    <td class="px-6 py-4 flex gap-2">
+        <button type="button"
+                class="edit-user-btn kt-btn kt-btn-sm kt-btn-secondary"
+                data-id="{{ $user->id }}"
+                data-last-name="{{ $user->last_name }}"
+                data-first-name="{{ $user->first_name }}"
+                data-email="{{ $user->email }}">
+            Modifier
+        </button>
+
+        @can('delete', $user)
+            <button type="button"
+                    class="delete-user-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200"
+                    data-id="{{ $user->id }}"
+                    data-url="{{ route('user.destroy', $user) }}">
+                Supprimer
+            </button>
+        @endcan
+
+    </td>
+</tr>

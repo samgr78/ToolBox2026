@@ -12,8 +12,11 @@ require __DIR__.'/web/student.php';
 Route::get('/', function () {
     return view('auth.login');
 });
+
 Route::get('/logout', function () {
    auth()->logout();
+   return redirect()->route('login');
 });
+
 Route::middleware('auth')->get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 

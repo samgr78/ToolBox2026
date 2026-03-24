@@ -1,4 +1,4 @@
-<tr data-id="{{ $cohort->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
+<tr data-cohort-id="{{ $cohort->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
     <td class="px-6 py-4">
         <div>
             <a href="{{ route('cohort.show', $cohort->id) }}"
@@ -17,27 +17,34 @@
         </span>
     </td>
 
-    <td class="px-6 py-4 text-sm font-medium text-gray-700 dark:text-white ">
+    <td class="px-6 py-4 text-sm font-medium text-gray-700 dark:text-white">
         {{ $cohort->users_count ?? $cohort->users->count() }}
     </td>
 
     <td class="px-6 py-4 flex gap-2">
 
         @can('update', $cohort)
-            <button onclick="openEditDrawer('{{ $cohort->id }}', '{{ $cohort->name }}', '{{ e($cohort->description) }}', '{{ \Carbon\Carbon::parse($cohort->start_date)->format('Y-m-d') }}', '{{ \Carbon\Carbon::parse($cohort->end_date)->format('Y-m-d') }}')">
+            <button
+                class="edit-cohort-btn text-sm px-3 py-1 rounded-md bg-blue-100 text-blue-600 hover:bg-blue-200"
+                data-id="{{ $cohort->id }}"
+                data-name="{{ $cohort->name }}"
+                data-description="{{ e($cohort->description) }}"
+                data-start-date="{{ \Carbon\Carbon::parse($cohort->start_date)->format('Y-m-d') }}"
+                data-end-date="{{ \Carbon\Carbon::parse($cohort->end_date)->format('Y-m-d') }}"
+            >
                 Modifier
             </button>
         @endcan
 
         @can('delete', $cohort)
-                <form class="cohort-delete-form" data-id="{{ $cohort->id }}">
-                    @csrf
-                    <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
-                        Supprimer
-                    </button>
-                </form>
+            <button
+                class="delete-cohort-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200"
+                data-id="{{ $cohort->id }}"
+                data-url="/cohort/{{ $cohort->id }}"
+            >
+                Supprimer
+            </button>
         @endcan
 
     </td>
-
 </tr>

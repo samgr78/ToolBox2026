@@ -28,11 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(module => module.initUserForm());
     }
 
-    if(document.querySelector('.cohort-delete-form')){
-        import('./features/cohorts/form.js')
-            .then(module=>module.destroy());
-    }
-
     // Map imports
     if (document.querySelector('#mapOne')) {
         import('./components/map').then(module => module.initMap());

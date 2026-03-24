@@ -5,6 +5,7 @@ namespace App\Entity\Cohort;
 use App\Http\Controllers\Controller;
 use App\Entity\Cohort\Cohort;
 use App\Queries\UserQuery;
+use App\Entity\Cohort\UpdateCohortAction;
 
 class CohortController extends Controller
 {
@@ -32,15 +33,17 @@ class CohortController extends Controller
         ]);
     }
 
-    public function update(CohortRequest $request, Cohort $cohort, StoreCohortAction $updateAction)
+    public function update(CohortRequest $request, Cohort $cohort, UpdateCohortAction $updateAction)
     {
         $this->authorize('update', $cohort);
         $dto = CohortDTO::fromRequest($request);
         $updateAction->execute($dto, $cohort);
 
+        $cohort->loadCount('users');
+
         return response()->json([
             'success' => true,
-            'redirect' => route('cohort.index')
+            'html' => view('pages.cohorts.partials.cohorts-table-row', compact('cohort'))->render(),
         ]);
     }
 

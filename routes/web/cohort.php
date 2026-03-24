@@ -10,7 +10,6 @@ Route::middleware(['auth'])->prefix('cohort')->name('cohort.')
         Route::get('/', [CohortController::class, 'index'])->name('index');
         Route::post('/store', [CohortController::class, 'store'])->name('store');
         Route::get('/{cohort}', 'show')->name('show');
-        Route::put('/{cohort}', 'update')->name('update');
+        Route::patch('/{cohort}', 'update')->name('update');
         Route::delete('/{cohort}', 'destroy')->name('destroy');
-
     });

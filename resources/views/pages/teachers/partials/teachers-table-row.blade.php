@@ -28,14 +28,16 @@
     </td>
 
     <td class="px-6 py-4 flex gap-2">
-        <button type="button"
-                class="edit-user-btn kt-btn kt-btn-sm kt-btn-secondary"
-                data-id="{{ $user->id }}"
-                data-last-name="{{ $user->last_name }}"
-                data-first-name="{{ $user->first_name }}"
-                data-email="{{ $user->email }}">
-            Modifier
-        </button>
+        @can('update', $user)
+            <button type="button"
+                    class="edit-user-btn kt-btn kt-btn-sm kt-btn-secondary"
+                    data-id="{{ $user->id }}"
+                    data-last-name="{{ $user->last_name }}"
+                    data-first-name="{{ $user->first_name }}"
+                    data-email="{{ $user->email }}">
+                Modifier
+            </button>
+        @endcan    
 
         @can('delete', $user)
             <button type="button"

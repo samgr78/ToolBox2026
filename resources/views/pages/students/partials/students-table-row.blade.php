@@ -26,9 +26,11 @@
 
     <td class="px-6 py-4 flex gap-2">
 
+        @can('update', $user)
             <button type="button" class="edit-user-btn kt-btn kt-btn-sm kt-btn-secondary" data-id="{{ $user->id }}" data-last-name="{{ $user->last_name }}" data-first-name="{{ $user->first_name }}" data-email="{{ $user->email }}">
                 Modifier
             </button>
+        @endcan    
         
         @can('delete', $user)    
             <form action="{{ route('user.destroy', $user) }}" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')">

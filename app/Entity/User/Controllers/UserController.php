@@ -20,6 +20,7 @@ class UserController extends Controller
 
     public function store(userRequest $request, StoreUserAction $action)
     {
+        $this->authorize('create', User::class);
         $dto = UserDTO::fromRequest($request);
         $result = $action->execute($dto);
 
@@ -31,6 +32,7 @@ class UserController extends Controller
 
     public function update(UserRequest $request, UpdateUserAction $action, User $user)
     {
+        $this->authorize('update', $user);
         $dto = UserDTO::fromRequest($request);
         $result = $action->execute($dto, $user);
 

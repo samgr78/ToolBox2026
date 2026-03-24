@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entity\Cohort;
+namespace App\Entity\Cohort\DTO;
+
+use App\Entity\Cohort\Requests\cohortRequest;
 
 readonly class CohortDTO
 {

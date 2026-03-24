@@ -1,6 +1,6 @@
 <?php
 
-use App\Entity\Dashboard\DashboardController;
+use App\Entity\Dashboard\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 require __DIR__.'/web/cohort.php';

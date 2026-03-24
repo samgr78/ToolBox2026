@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\School;
+namespace App\Entity\School\Models;
 
 use Database\Factories\Entity\School\SchoolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

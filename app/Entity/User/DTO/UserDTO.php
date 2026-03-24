@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entity\User;
+namespace App\Entity\User\DTO;
+
+use App\Entity\User\Requests\userRequest;
 
 readonly class UserDTO
 {

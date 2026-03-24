@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\entity\cohort\Cohort;
-use App\entity\user\User;
-use Illuminate\Auth\Access\Response;
+use App\Entity\Cohort\Models\Cohort;
+use App\Entity\User\Models\User;
 
 class UserPolicy
 {
@@ -40,4 +39,4 @@ class UserPolicy
     {
         return $user->schools()->wherePivot('role', 'admin')->exists();
     }
-}    
+}

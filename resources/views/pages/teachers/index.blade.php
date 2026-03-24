@@ -22,7 +22,7 @@
         </div>
 
         <div class="lg:col-span-1">
-            @can('create', App\Entity\user\User::class)
+            @can('create', \App\Entity\User\Models\User::class)
                 @include('pages.teachers.drawers.teacher-form')
             @endcan
         </div>

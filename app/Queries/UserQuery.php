@@ -2,7 +2,7 @@
 
 namespace App\Queries;
 
-use App\Entity\User\User;
+use App\Entity\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 
 class UserQuery

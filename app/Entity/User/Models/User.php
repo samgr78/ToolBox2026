@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Entity\User;
+namespace App\Entity\User\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Builders\UserBuilder;
-use App\Entity\Cohort\Cohort;
-use App\Entity\School\School;
+use App\Entity\Cohort\Models\Cohort;
+use App\Entity\School\Models\School;
+use App\Entity\User\Assessment;
+use App\Entity\User\Task;
 use Database\Factories\Entity\User\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 

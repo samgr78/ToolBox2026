@@ -3,7 +3,6 @@
 namespace App\Entity\User\Student;
 
 use App\Http\Controllers\Controller;
-use App\Entity\User\User;
 use App\Queries\UserQuery;
 
 class StudentController extends Controller

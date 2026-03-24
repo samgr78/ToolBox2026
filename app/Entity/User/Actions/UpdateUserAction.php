@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Entity\User;
+namespace App\Entity\User\Actions;
 
+use App\Entity\User\DTO\UserDTO;
+use App\Entity\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UpdateUserAction

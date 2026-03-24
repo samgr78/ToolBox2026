@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Entity\School;
 
-use App\Entity\School\School;
+use App\Entity\School\Models\School;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class SchoolFactory extends Factory

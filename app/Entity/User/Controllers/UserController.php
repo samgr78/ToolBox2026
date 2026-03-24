@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Entity\User;
+namespace App\Entity\User\Controllers;
 
+use App\Entity\User\Actions\StoreUserAction;
+use App\Entity\User\Actions\UpdateUserAction;
+use App\Entity\User\DTO\UserDTO;
+use App\Entity\User\Models\User;
+use App\Entity\User\Requests\userRequest;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller

@@ -2,9 +2,8 @@
 
 namespace App\Policies;
 
-use App\Entity\Cohort\Cohort;
-use App\Entity\User\User;
-use Illuminate\Auth\Access\Response;
+use App\Entity\Cohort\Models\Cohort;
+use App\Entity\User\Models\User;
 
 class CohortPolicy
 {

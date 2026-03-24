@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Entity\Cohort;
+namespace App\Entity\Cohort\Controllers;
 
+use App\Entity\Cohort\Actions\StoreCohortAction;
+use App\Entity\Cohort\DTO\CohortDTO;
+use App\Entity\Cohort\Models\Cohort;
+use App\Entity\Cohort\Requests\CohortRequest;
 use App\Http\Controllers\Controller;
-use App\Entity\Cohort\Cohort;
-use App\Queries\UserQuery;
 
 class CohortController extends Controller
 {

@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\User;
 
-use App\Entity\User\User;
+use App\Entity\User\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Traits\CreateUserWithSchool;

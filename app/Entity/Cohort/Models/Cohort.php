@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Entity\Cohort;
+namespace App\Entity\Cohort\Models;
 
 use App\Builders\CohortBuilder;
-use App\Entity\School\School;
-use App\Entity\User\User;
+use App\Entity\Cohort\Assessment;
+use App\Entity\Cohort\Task;
+use App\Entity\School\Models\School;
+use App\Entity\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Cohort extends Model

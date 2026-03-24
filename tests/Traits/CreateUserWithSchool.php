@@ -2,9 +2,9 @@
 
 namespace Tests\Traits;
 
-use App\Entity\School\School;
-use App\Entity\User\User;
-use App\Entity\UserSchool;
+use App\Entity\Models\UserSchool;
+use App\Entity\School\Models\School;
+use App\Entity\User\Models\User;
 
 trait CreateUserWithSchool
 {

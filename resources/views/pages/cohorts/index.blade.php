@@ -22,7 +22,7 @@
         </div>
 
         <div class="lg:col-span-1">
-            @can('create', App\entity\cohort\Cohort::class)
+            @can('create', \App\Entity\Cohort\Models\Cohort::class)
                 @include('pages.cohorts.drawers.cohort-form')
             @endcan
         </div>

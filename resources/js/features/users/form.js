@@ -27,15 +27,6 @@ function attachDeleteListener(btn) {
                 const row = document.querySelector(`#users-table tr[data-user-id="${id}"]`);
                 if (row) row.remove();
 
-                const tbody = document.querySelector('#users-table tbody');
-                if (tbody && !tbody.querySelector('tr')) {
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="4" class="px-6 py-12 text-center text-gray-400">
-                                Aucun enseignant pour le moment.
-                            </td>
-                        </tr>`;
-                }
             }
         } catch (err) {
             console.error('Erreur suppression:', err);

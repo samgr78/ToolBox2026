@@ -7,6 +7,8 @@ use App\Entity\Cohort\DTO\CohortDTO;
 use App\Entity\Cohort\Models\Cohort;
 use App\Entity\Cohort\Requests\CohortRequest;
 use App\Http\Controllers\Controller;
+use App\Queries\CohortQuery;
+use App\Queries\UserQuery;
 
 class CohortController extends Controller
 {
@@ -20,7 +22,20 @@ class CohortController extends Controller
     public function show(Cohort $cohort)
     {
         $this->authorize('view', $cohort);
-        return view('pages.cohorts.show', compact('cohort'));
+        $schoolId = auth()->user()->current_school_id;
+
+        $teachers = CohortQuery::forCohort($cohort->id)->forSchool($schoolId)->forRole('teacher')->get();
+        $students = CohortQuery::forCohort($cohort->id)->forSchool($schoolId)->forRole('student')->get();
+
+        $existingTeacherIds = $teachers->pluck('id')->toArray();
+        $existingStudentIds = $students->pluck('id')->toArray();
+
+        $availableTeachers = UserQuery::forSchool($schoolId)->forRole('teacher')->excludeIds($existingTeacherIds)->get();
+
+        $availableStudents = UserQuery::forSchool($schoolId)->forRole('student')->excludeIds($existingStudentIds)->get();
+
+        return view('pages.cohorts.show', compact('cohort', 'teachers', 'students', 'availableTeachers', 'availableStudents',
+        ));
     }
 
     public function store(CohortRequest $request, StoreCohortAction $storeAction){

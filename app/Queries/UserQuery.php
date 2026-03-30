@@ -28,6 +28,15 @@ class UserQuery
         return $this;
     }
 
+    public function excludeIds(array $ids): self
+    {
+        if (!empty($ids)) {
+            $this->query->whereNotIn('U.id', $ids);
+        }
+
+        return $this;
+    }
+
     public function get() {
         return $this->query->get();
     }

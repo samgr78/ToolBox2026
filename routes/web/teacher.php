@@ -7,4 +7,5 @@ Route::middleware(['auth'])->prefix('teacher')->name('teacher.')
     ->controller(teacherController::class)
     ->group(function () {
         Route::get('/', [teacherController::class, 'index'])->name('index');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
     });

@@ -1,4 +1,4 @@
-<tr class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
+<tr data-id="{{ $cohort->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
     <td class="px-6 py-4">
         <div>
             <a href="{{ route('cohort.show', $cohort->id) }}"
@@ -30,13 +30,12 @@
         @endcan
 
         @can('delete', $cohort)
-            <form action="{{ route('cohort.destroy', $cohort->id) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
-                    Supprimer
-                </button>
-            </form>
+                <form class="cohort-delete-form" data-id="{{ $cohort->id }}">
+                    @csrf
+                    <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+                        Supprimer
+                    </button>
+                </form>
         @endcan
 
     </td>

@@ -1,6 +1,5 @@
 import {sendRequest} from "../../utils/fetch.js";
 
-console.log('cohort.js chargé');
 export function initCohortForm() {
     const form = document.querySelector('#cohort-form');
     if (!form) return;
@@ -28,8 +27,32 @@ export function initCohortForm() {
 
         } catch (err) {
             if (err.status === 422 && err.errors) {
-                displayValidationErrors(err.errors);
+                //displayValidationErrors(err.errors);
             }
         }
+    });
+}
+
+export function destroy() {
+    document.addEventListener('submit', async (e) => {
+        const form = e.target.closest('.cohort-delete-form');
+        if (!form) return;
+
+        e.preventDefault();
+        if (!confirm('Supprimer cette promotion ?')) return;
+
+        const cohortId = form.dataset.id;
+
+        try {
+            const response = await sendRequest(`/cohort/${cohortId}`, 'DELETE');
+
+            if (response.success) {
+                document.querySelector(`tr[data-id="${response.id}"]`)?.remove();
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
+
     });
 }

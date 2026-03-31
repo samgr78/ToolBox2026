@@ -2,11 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Entity\School\School;
-use App\Entity\User\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Entity\School\Models\School;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DefaultSchoolSeeder extends Seeder
 {

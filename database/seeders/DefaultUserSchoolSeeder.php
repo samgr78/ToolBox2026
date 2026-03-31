@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Entity\UserSchool;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Entity\Models\UserSchool;
 use Illuminate\Database\Seeder;
 
 class DefaultUserSchoolSeeder extends Seeder

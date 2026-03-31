@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Entity\CohortUser;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Entity\Models\CohortUser;
 use Illuminate\Database\Seeder;
 
 class DefaultCohortUserSeeder extends Seeder

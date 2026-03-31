@@ -18,7 +18,7 @@
     </div>
 
     <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+        <table id="students-table" class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
             <thead class="bg-gray-50 dark:bg-gray-800">
             <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 <th class="px-6 py-3">Étudiant</th>

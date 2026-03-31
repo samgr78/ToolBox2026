@@ -1,6 +1,7 @@
 <?php
 
 use App\Entity\Cohort\Controllers\CohortController;
+use App\Entity\CohortUser\Controllers\CohortUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->prefix('cohort')->name('cohort.')
@@ -12,5 +13,6 @@ Route::middleware(['auth'])->prefix('cohort')->name('cohort.')
         Route::get('/{cohort}', 'show')->name('show');
         Route::put('/{cohort}', 'update')->name('update');
         Route::delete('/{cohort}', 'destroy')->name('destroy');
+        Route::post('/attach-user', [CohortUserController::class, 'store'])->name('cohorts.users.store');
 
     });

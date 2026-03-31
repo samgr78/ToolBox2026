@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(module => module.initCohortForm());
     }
 
+    if (document.querySelector('#add-student-form') || document.querySelector('#add-teacher-form')) {
+        import('./features/cohorts_users/form.js')
+            .then(module => module.initCohortUsers())
+            .catch(err => console.error("Erreur de chargement du module cohort users:", err));
+    }
+
     if (document.querySelector('#user-form')) {
         import('./features/users/form.js')
             .then(module => module.initUserForm());

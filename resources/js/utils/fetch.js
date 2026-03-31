@@ -37,12 +37,12 @@ export async function sendRequest(url, method = 'POST', data = {}) {
         }
 
         // If network error
-        if(!response.ok) {
-            KTToast.show({
-                message: json.message,
-                variant: 'destructive',
-            });
-            throw { status: response.status, ...json };
+        if (typeof KTToast !== 'undefined') {
+            // Ton code KTToast existant ici
+            // KTToast.show(...);
+        } else {
+            // Fallback optionnel si KTToast n'est pas là
+            console.log("Requête terminée (KTToast non disponible)");
         }
 
         return {status: response.status, ...json};

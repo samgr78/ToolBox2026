@@ -19,16 +19,6 @@
         {{ $user->email }}
     </td>
 
-    <td class="px-6 py-4">
-        @if($user->pivot->subject ?? null)
-            <span class="inline-flex items-center px-2.5 py-1 text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 rounded-full">
-                {{ $user->pivot->subject }}
-            </span>
-        @else
-            <span class="text-xs text-gray-400">—</span>
-        @endif
-    </td>
-
     @can('update', $cohort)
         <td class="px-6 py-4">
             <form class="remove-teacher-form" data-user-id="{{ $user->id }}" data-cohort-id="{{ $cohort->id }}">

@@ -23,7 +23,6 @@
             <tr class="text-left text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400">
                 <th class="px-6 py-3">Enseignant</th>
                 <th class="px-6 py-3">Email</th>
-                <th class="px-6 py-3">Matière</th>
                 @can('update', $cohort)
                     <th class="px-6 py-3">Actions</th>
                 @endcan

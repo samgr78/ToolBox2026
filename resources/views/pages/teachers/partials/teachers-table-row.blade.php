@@ -37,15 +37,19 @@
                     data-email="{{ $user->email }}">
                 Modifier
             </button>
-        @endcan    
+        @endcan
 
         @can('delete', $user)
-            <button type="button"
-                    class="delete-user-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200"
-                    data-id="{{ $user->id }}"
-                    data-url="{{ route('user.destroy', $user) }}">
-                Supprimer
-            </button>
+            <form data-ajax-form
+                  data-confirm="Etes vous sur ?"
+                  action="{{ route('user.destroy', $user) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                        class="delete-user-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+                    Supprimer
+                </button>
+            </form>
         @endcan
 
     </td>

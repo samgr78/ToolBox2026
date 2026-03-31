@@ -15,8 +15,13 @@ window.FullCalendar = Calendar;
 
 Alpine.start();
 
+import './utils/thememode.js';
+import './features/users/index.js';
+import {bindAjaxForm} from "./utils/fetch.js";
+
 // Initialize components on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
+    bindAjaxForm();
 
     if (document.querySelector('#cohort-form')) {
         import('./features/cohorts/form.js')

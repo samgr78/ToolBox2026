@@ -30,17 +30,20 @@
             <button type="button" class="edit-user-btn kt-btn kt-btn-sm kt-btn-secondary" data-id="{{ $user->id }}" data-last-name="{{ $user->last_name }}" data-first-name="{{ $user->first_name }}" data-email="{{ $user->email }}">
                 Modifier
             </button>
-        @endcan    
-        
-        @can('delete', $user)    
-            <form action="{{ route('user.destroy', $user) }}" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+        @endcan
+
+        @can('delete', $user)
+            <form data-ajax-form
+                  data-confirm="Etes vous sur ?"
+                  action="{{ route('user.destroy', $user) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
+                <button type="submit"
+                        class="delete-user-btn text-sm px-3 py-1 rounded-md bg-red-100 text-red-600 hover:bg-red-200">
                     Supprimer
                 </button>
             </form>
-        @endcan    
+        @endcan
 
     </td>
 

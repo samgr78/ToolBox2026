@@ -1,8 +1,17 @@
 import { sendRequest } from "../../utils/fetch.js";
 
-function attachEditListener(btn, form) {
-    btn.addEventListener('click', () => {
-        const { id, lastName, firstName, email } = btn.dataset;
+export function bindEditListener() {
+    const table = document.querySelector('#users-table');
+
+    if(!table) return;
+
+    table.addEventListener('click', function(event) {
+        const editBtn = event.target.closest('.edit-user-btn');
+
+        if(!editBtn) return;
+
+        const form = document.querySelector('#user-form')
+        const { id, lastName, firstName, email } = editBtn.dataset;
 
         form.querySelector('[name="last_name"]').value = lastName;
         form.querySelector('[name="first_name"]').value = firstName;
@@ -11,27 +20,16 @@ function attachEditListener(btn, form) {
     });
 }
 
-function attachDeleteListener(btn) {
-    btn.addEventListener('click', async () => {
-        if (!confirm('Supprimer cet utilisateur ?')) return;
+export function bindUserDeleted() {
+    document.addEventListener('User.Deleted', function(event) {
+        const formEl = event.target.closest('form');
 
-        const { id, url } = btn.dataset;
+        if(!formEl) return;
 
-        try {
-            const formData = new FormData();
-            formData.append('_method', 'DELETE');
+        const tRow = formEl.closest('tr');
 
-            const response = await sendRequest(url, 'POST', formData);
-
-            if (response.success) {
-                const row = document.querySelector(`#users-table tr[data-user-id="${id}"]`);
-                if (row) row.remove();
-
-            }
-        } catch (err) {
-            console.error('Erreur suppression:', err);
-        }
-    });
+        if(tRow) tRow.remove();
+    })
 }
 
 function updateTableRow(html, form) {
@@ -46,23 +44,11 @@ function updateTableRow(html, form) {
     existingRow.remove();
 
     const newRow = tbody.querySelector(`tr[data-user-id="${userId}"]`);
-    const editBtn = newRow?.querySelector('.edit-user-btn');
-    if (editBtn) attachEditListener(editBtn, form);
-    const deleteBtn = newRow?.querySelector('.delete-user-btn');
-    if (deleteBtn) attachDeleteListener(deleteBtn);
 }
 
 export function initUserForm() {
     const form = document.querySelector('#user-form');
     if (!form) return;
-
-    document.querySelectorAll('.edit-user-btn').forEach(btn => {
-        attachEditListener(btn, form);
-    });
-
-    document.querySelectorAll('.delete-user-btn').forEach(btn => {
-        attachDeleteListener(btn);
-    });
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -79,6 +65,8 @@ export function initUserForm() {
             formData.append('_method', 'PATCH');
         }
 
+        const tbody = document.querySelector('#users-table tbody');
+        const emptyRow = tbody.querySelector('td[colspan]')?.closest('tr');
         try {
             const response = await sendRequest(url, method, formData);
 
@@ -86,17 +74,10 @@ export function initUserForm() {
                 if (userId) {
                     updateTableRow(response.user, form);
                 } else {
-                    const tbody = document.querySelector('#users-table tbody');
-                    const emptyRow = tbody.querySelector('td[colspan]')?.closest('tr');
+                    // Delete the empty row in the first insert
                     if (emptyRow) emptyRow.remove();
 
-                    tbody.insertAdjacentHTML('beforeend', response.html);
-
-                    const newRow = tbody.lastElementChild;
-                    const newEditBtn = newRow.querySelector('.edit-user-btn');
-                    if (newEditBtn) attachEditListener(newEditBtn, form);
-                    const newDeleteBtn = newRow.querySelector('.delete-user-btn');
-                    if (newDeleteBtn) attachDeleteListener(newDeleteBtn);
+                    if(tbody) tbody.insertAdjacentHTML('beforeend', response.html);
                 }
 
                 form.reset();

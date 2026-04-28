@@ -11,12 +11,14 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    //Affiche la page de profil de l'utilisateur
     public function index(): View
     {
         $user = auth()->user();
         return view('pages.profile.index', compact('user'));
     }
 
+    //Met à jour le profil de l'utilisateur
     public function update(ProfileRequest $request, UpdateProfileAction $action): JsonResponse
     {
         $dto = ProfileDTO::fromRequest($request);

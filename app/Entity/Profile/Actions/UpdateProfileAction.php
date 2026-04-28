@@ -7,6 +7,8 @@ use App\Entity\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
+
+//Action pour mettre à jour le profil de l'utilisateur
 class UpdateProfileAction
 {
     public function execute(ProfileDTO $dto, User $user): User
@@ -16,6 +18,7 @@ class UpdateProfileAction
                 'last_name'  => $dto->last_name,
                 'first_name' => $dto->first_name,
                 'email'      => $dto->email,
+                //'avatar'     => $dto->avatar,
             ];
 
             if ($dto->password) {

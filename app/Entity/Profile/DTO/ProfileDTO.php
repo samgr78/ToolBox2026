@@ -4,6 +4,7 @@ namespace App\Entity\Profile\DTO;
 
 use App\Entity\Profile\Requests\ProfileRequest;
 
+//DTO pour transporter les données de mise à jour du profil
 readonly class ProfileDTO
 {
     public function __construct(
@@ -11,6 +12,7 @@ readonly class ProfileDTO
         public string $first_name,
         public string $email,
         public ?string $password,
+        //public ?string $avatar,
     ) {
     }
 
@@ -21,6 +23,7 @@ readonly class ProfileDTO
             first_name: $request->input('first_name'),
             email: $request->input('email'),
             password: $request->input('password'),
+            //avatar: $request->input('avatar'),
         );
     }
 }

@@ -5,6 +5,7 @@ namespace App\Entity\Profile\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+//Request pour valider les données de mise à jour du profil
 class ProfileRequest extends FormRequest
 {
     public function authorize(): bool { return true; }
@@ -16,6 +17,7 @@ class ProfileRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'email'      => ['required', 'email', Rule::unique('users')->ignore(auth()->id())],
             'password'   => ['nullable', 'string', 'min:6'],
+            //'avatar'     => ['nullable', 'string', 'max:255'],
         ];
     }
 }

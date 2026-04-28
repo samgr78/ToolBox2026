@@ -2,14 +2,14 @@
 
 namespace App\Entity\Profile\Actions;
 
-use App\Entity\Profile\DTO\AccountDTO;
+use App\Entity\Profile\DTO\ProfileDTO;
 use App\Entity\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
-class UpdateAccountAction
+class UpdateProfileAction
 {
-    public function execute(AccountDTO $dto, User $user): User
+    public function execute(ProfileDTO $dto, User $user): User
     {
         return DB::transaction(function () use ($dto, $user) {
             $data = [

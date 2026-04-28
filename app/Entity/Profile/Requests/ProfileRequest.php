@@ -5,7 +5,7 @@ namespace App\Entity\Profile\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class AccountRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     public function authorize(): bool { return true; }
 

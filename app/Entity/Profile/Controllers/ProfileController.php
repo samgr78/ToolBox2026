@@ -2,9 +2,9 @@
 
 namespace App\Entity\Profile\Controllers;
 
-use App\Entity\Profile\Actions\UpdateAccountAction;
-use App\Entity\Profile\DTO\AccountDTO;
-use App\Entity\Profile\Requests\AccountRequest;
+use App\Entity\Profile\Actions\UpdateProfileAction;
+use App\Entity\Profile\DTO\ProfileDTO;
+use App\Entity\Profile\Requests\ProfileRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
@@ -17,9 +17,9 @@ class ProfileController extends Controller
         return view('pages.profile.index', compact('user'));
     }
 
-    public function update(AccountRequest $request, UpdateAccountAction $action): JsonResponse
+    public function update(ProfileRequest $request, UpdateProfileAction $action): JsonResponse
     {
-        $dto = AccountDTO::fromRequest($request);
+        $dto = ProfileDTO::fromRequest($request);
         $action->execute($dto, auth()->user());
 
         return response()->json([

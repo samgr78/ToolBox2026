@@ -2,9 +2,9 @@
 
 namespace App\Entity\Profile\DTO;
 
-use App\Entity\Profile\Requests\AccountRequest;
+use App\Entity\Profile\Requests\ProfileRequest;
 
-readonly class AccountDTO
+readonly class ProfileDTO
 {
     public function __construct(
         public string $last_name,
@@ -14,7 +14,7 @@ readonly class AccountDTO
     ) {
     }
 
-    public static function fromRequest(AccountRequest $request): AccountDTO
+    public static function fromRequest(ProfileRequest $request): ProfileDTO
     {
         return new self(
             last_name: $request->input('last_name'),

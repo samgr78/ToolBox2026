@@ -98,8 +98,8 @@ class User extends Authenticatable
         return $this->roleInSchool($schoolId) === $role;
     }
 
-    public function notes()
+    public function ratings()
     {
-        return $this->belongsToMany(Ratings::class, 'users_ratings');
+        return $this->belongsToMany(Ratings::class, 'users_ratings', 'user_id', 'rating_id');
     }
 }

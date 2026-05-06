@@ -45,23 +45,28 @@
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-800">
-                            <tr class="text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-white">
-                                <th class="px-6 py-3 text-left">Matières</th>
-                                <th class="px-6 py-3 text-left">Note</th>
-                                <th class="px-6 py-3 text-right">Date</th>
-                            </tr>
+                        <tr class="text-xs font-semibold text-gray-500 uppercase tracking-wider dark:text-white">
+                            <th class="px-6 py-3 text-left">Évaluation</th>
+                            <th class="px-6 py-3 text-left">Note</th>
+                        </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200 dark:divide-gray-700 bg-white dark:bg-gray-800">
+                        @forelse ($user->ratings as $rating)
                             <tr>
-                                <td class="px-6 py-4 text-sm text-gray-800 dark:text-white">Python</td>
-                                <td class="px-6 py-4 text-sm text-gray-400">15/20</td>
-                                <td class="px-6 py-4 text-sm text-gray-400 text-right">06/05/2026</td>
+                                <td class="px-6 py-4 text-sm text-gray-800 dark:text-white">
+                                    {{ $rating->pivot->tests }}
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-400">
+                                    {{ $rating->rate }}/20
+                                </td>
                             </tr>
+                        @empty
                             <tr>
-                                <td class="px-6 py-4 text-sm text-gray-800 dark:text-white">Laravel</td>
-                                <td class="px-6 py-4 text-sm text-gray-400">8/20</td>
-                                <td class="px-6 py-4 text-sm text-gray-400 text-right">01/05/2026</td>
+                                <td colspan="2" class="px-6 py-4 text-sm text-gray-400 text-center italic">
+                                    Aucune note disponible
+                                </td>
                             </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -100,6 +100,7 @@ class User extends Authenticatable
 
     public function ratings()
     {
-        return $this->belongsToMany(Ratings::class, 'users_ratings', 'user_id', 'rating_id');
+        return $this->belongsToMany(Ratings::class, 'users_ratings', 'user_id', 'rating_id')
+            ->withPivot('tests');
     }
 }

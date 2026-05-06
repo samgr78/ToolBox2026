@@ -1,6 +1,14 @@
 <div class="p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <h3 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Importer les Notes (Excel)</h3>
 
+    <div class="mb-4 flex justify-end">
+        <a href="{{ asset('files/Template_Excel_Toolbox.xlsx') }}" download="Template_Excel_Toolbox.xlsx">
+            <button type="button" class="w-full sm:w-auto px-5 py-2.5 text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-green-300 rounded-lg transition-colors dark:bg-green-500 dark:hover:bg-green-600 focus:outline-none">
+                Télécharger le modèle
+            </button>
+        </a>
+    </div>
+
     <form action="{{ route('rate.import') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
         @csrf
 

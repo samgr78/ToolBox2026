@@ -15,7 +15,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $this->authorize('view', $user);
-        return view('pages.users.show', compact('user'));
+        return view('pages.students.show', compact('user'));
     }
 
     public function store(userRequest $request, StoreUserAction $action)

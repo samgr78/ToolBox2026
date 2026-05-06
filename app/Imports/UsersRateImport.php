@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class UsersNotesImport implements ToCollection, WithHeadingRow
+class UsersRateImport implements ToCollection, WithHeadingRow
 {
     public function collection(Collection $rows)
     {
@@ -24,7 +24,8 @@ class UsersNotesImport implements ToCollection, WithHeadingRow
             );
 
             $note = Ratings::create([
-                'rate' => $row['ratings']
+                'rate' => $row['note'],
+                'tests' => $row['Evaluation'],
             ]);
 
             $user->rating()->attach($note->id);

@@ -35,7 +35,8 @@ class UsersRateImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                 'rate' => (float) $noteValue
             ]);
 
-            $user->ratings()->attach($note->id, ['tests' => 'Import automatique']);
+            $testName = $row['evaluations'] ?? 'Import automatique';
+            $user->ratings()->attach($note->id, ['tests' => $testName]);
         }
     }
 }

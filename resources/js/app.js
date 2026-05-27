@@ -33,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(module => module.initUserForm());
     }
 
+    if (document.querySelector('#importForm')) {
+        import('./features/import-excel').then(module => module.initImportExcel());
+    }
+
     if(document.querySelector('.cohort-delete-form')){
         import('./features/cohorts/form.js')
             .then(module=>module.destroy());

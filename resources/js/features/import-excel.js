@@ -1,3 +1,7 @@
+/**
+ * Ce module gère l'importation de fichiers Excel pour les évaluations des utilisateurs.
+ * Il permet de prévisualiser les données avant l'importation définitive en base de données.
+ */
 export function initImportExcel() {
     const previewModal = document.getElementById('previewModal');
     const fileInput = document.getElementById('file_input');
@@ -9,6 +13,16 @@ export function initImportExcel() {
     let currentFormData = null;
     const { ratePreview: ratePreviewUrl, rateImport: rateImportUrl } = importForm.dataset;
 
+    // -------------------------------------------------------------------------
+    // Utilitaires UI
+    // -------------------------------------------------------------------------
+
+    /**
+     * Affiche un message temporaire (5s) au-dessus du formulaire.
+     *
+     * @param {string} message  Texte à afficher
+     * @param {'success'|'error'} type  Détermine la couleur (vert / rouge)
+     */
     function showMessage(message, type = 'success') {
         const msg = document.createElement('div');
         msg.className = `mb-4 text-sm font-medium ${type === 'success' ? 'text-green-600' : 'text-red-600'}`;
@@ -17,12 +31,23 @@ export function initImportExcel() {
         setTimeout(() => msg.remove(), 5000);
     }
 
+    /**
+     * Ferme la modale et réinitialise l'état
+     */
     function closeModal() {
         previewModal.classList.add('hidden');
         fileInput.value = '';
         currentFormData = null;
     }
 
+    // -------------------------------------------------------------------------
+    // Logique d'importation et de prévisualisation
+    // -------------------------------------------------------------------------
+
+    /**
+     * Affiche les données prévisualisées dans la modale.
+     * @param {Array<Object>} data  Tableau de lignes (objets associatifs)
+     */
     function displayPreview(data) {
         const recordCount = document.getElementById('recordCount');
         const thead = document.querySelector('#previewTable thead');
@@ -59,11 +84,17 @@ export function initImportExcel() {
         });
     }
 
+    // -------------------------------------------------------------------------
+    // Étape 1 — Prévisualisation du fichier après sélection
+    // -------------------------------------------------------------------------
+
     fileInput.addEventListener('change', async function () {
         if (!fileInput.files.length) return;
 
         const formData = new FormData();
         formData.append('fichier_excel', fileInput.files[0]);
+
+        // Token CSRF pour Laravel récupéré depuis un champ caché dans le formulaire
         formData.append('_token', document.querySelector('input[name="_token"]').value);
 
         fileInput.disabled = true;
@@ -74,6 +105,7 @@ export function initImportExcel() {
 
             if (data.success) {
                 displayPreview(data.data);
+                // Stocke les données du formulaire pour l'importation finale après confirmation
                 currentFormData = formData;
                 previewModal.classList.remove('hidden');
             } else {
@@ -81,6 +113,7 @@ export function initImportExcel() {
                 fileInput.value = '';
             }
         } catch {
+            // Message d'érreur générique en cas de problème réseau ou autre
             showMessage('Erreur lors du chargement du fichier', 'error');
             fileInput.value = '';
         } finally {
@@ -88,9 +121,15 @@ export function initImportExcel() {
         }
     });
 
+    // -------------------------------------------------------------------------
+    // Étape 2 — Importation définitive après confirmation
+    // -------------------------------------------------------------------------
+
     confirmImportBtn.addEventListener('click', async function () {
+        // Si les données du formulaire ne sont pas disponibles, on arrête l'importation
         if (!currentFormData) return;
 
+        // Désactive le bouton pour éviter les clics multiples
         confirmImportBtn.disabled = true;
         confirmImportBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span>Importation...';
 
@@ -105,10 +144,15 @@ export function initImportExcel() {
         } catch {
             showMessage('Erreur lors de l\'importation', 'error');
         } finally {
+            // Réactive le bouton pour permettre une nouvelle tentative
             confirmImportBtn.disabled = false;
             confirmImportBtn.innerHTML = 'Valider';
         }
     });
+
+    // -------------------------------------------------------------------------
+    // Fermeture de la modale
+    // -------------------------------------------------------------------------
 
     document.getElementById('closeModalBtn').addEventListener('click', closeModal);
     previewModal.addEventListener('click', e => e.target === previewModal && closeModal());

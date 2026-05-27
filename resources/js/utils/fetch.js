@@ -46,14 +46,7 @@ export async function sendRequest(url, method = 'POST', data = {}) {
             }).showToast();
         }
 
-        // If network error
-        if(!response.ok) {
-            KTToast.show({
-                message: json.message,
-                variant: 'destructive',
-            });
-            throw { status: response.status, ...json };
-        }
+
 
         return {status: response.status, ...json};
     });

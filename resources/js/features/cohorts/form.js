@@ -1,4 +1,4 @@
-import {sendRequest} from "../../utils/fetch.js";
+import { sendRequest } from "../../utils/fetch.js";
 
 export function initCohortForm() {
     const form = document.querySelector('#cohort-form');
@@ -15,20 +15,39 @@ export function initCohortForm() {
 
         if (cohortId) {
             url = `/cohort/${cohortId}`;
-            formData.append('_method', 'PATCH');
+            formData.append('_method', 'PUT');
         }
 
         try {
             const response = await sendRequest(url, method, formData);
 
             if (response.success) {
-                document.querySelector('#cohorts-table tbody').innerHTML += response.html;
+                if (cohortId) {
+                    // --- MODE MISE À JOUR ---
+                    // 1. On cible l'ancienne ligne dans le tableau
+                    const row = document.querySelector(`tr[data-id="${cohortId}"]`);
+                    if (row) {
+                        // On remplace le HTML de la ligne par le nouveau
+                        row.outerHTML = response.html;
+                    }
+
+                    // 2. On remet le formulaire à zéro pour les prochains ajouts
+                    form.reset();
+                    delete form.dataset.cohortId; // On supprime l'ID
+
+                    // 3. On remet le titre d'origine
+                    const title = form.closest('.bg-white').querySelector('h3');
+                    if (title) title.innerText = "Ajouter une promotion";
+
+                } else if (response.html) {
+                    // --- MODE CRÉATION ---
+                    document.querySelector('#cohorts-table tbody').innerHTML += response.html;
+                    form.reset();
+                }
             }
 
         } catch (err) {
-            if (err.status === 422 && err.errors) {
-                //displayValidationErrors(err.errors);
-            }
+            console.error(err);
         }
     });
 }
@@ -53,6 +72,29 @@ export function destroy() {
         } catch (err) {
             console.error(err);
         }
-
     });
+}
+
+export function openEditDrawer() {
+    // On l'attache à window car tu utilises onclick="..." dans ton Blade
+    window.openEditDrawer = function(id, name, description, startDate, endDate) {
+        const form = document.querySelector('#cohort-form');
+        if (!form) return;
+
+        // 1. Passage en mode édition (PATCH)
+        form.dataset.cohortId = id;
+
+        // 2. Pré-remplissage des champs
+        form.querySelector('[name="name"]').value = name;
+        form.querySelector('[name="description"]').value = description;
+        form.querySelector('[name="start_date"]').value = startDate;
+        form.querySelector('[name="end_date"]').value = endDate;
+
+        // 3. Changement du titre pour une meilleure UX
+        const title = form.closest('.bg-white').querySelector('h3');
+        if (title) title.innerText = "Modifier la promotion";
+
+        // 4. On fait défiler la page jusqu'au formulaire
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
 }

@@ -7,6 +7,7 @@ use App\Entity\Cohort\DTO\CohortDTO;
 use App\Entity\Cohort\Models\Cohort;
 use App\Entity\Cohort\Requests\CohortRequest;
 use App\Http\Controllers\Controller;
+use App\Entity\Cohort\Actions\UpdateCohortAction;
 
 class CohortController extends Controller
 {
@@ -34,15 +35,17 @@ class CohortController extends Controller
         ]);
     }
 
-    public function update(CohortRequest $request, Cohort $cohort, StoreCohortAction $updateAction)
+    public function update(CohortRequest $request, Cohort $cohort, UpdateCohortAction $updateAction)
     {
         $this->authorize('update', $cohort);
         $dto = CohortDTO::fromRequest($request);
         $updateAction->execute($dto, $cohort);
 
+        $html = view('pages.cohorts.partials.cohorts-table-row', compact('cohort'))->render();
+
         return response()->json([
             'success' => true,
-            'redirect' => route('cohort.index')
+            'html' => $html
         ]);
     }
 

@@ -24,8 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
     bindAjaxForm();
 
     if (document.querySelector('#cohort-form')) {
-        import('./features/cohorts/form.js')
-            .then(module => module.initCohortForm());
+        import('./features/cohorts/form.js').then(module => {
+            module.initCohortForm();
+            module.openEditDrawer();
+        });
     }
 
     if (document.querySelector('#user-form')) {

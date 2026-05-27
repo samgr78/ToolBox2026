@@ -2,8 +2,8 @@
 
 namespace App\Entity\Dashboard\Controllers;
 
-use App\Entity\Cohort\Models\Cohort;
-use App\Entity\User\Models\User;
+use App\Queries\CohortQuery;
+use App\Queries\UserQuery;
 use App\Http\Controllers\Controller;
 
 /**
@@ -19,21 +19,27 @@ class DashboardController extends Controller
         $current_school_id = auth()->user()->current_school_id;
 
         // Récupérer les 5 dernières promotions avec le nombre d'étudiants dans chaque promotion
-        $cohorts = Cohort::forSchool($current_school_id)
-            ->withCount('users as students_count')
-            ->take(5)
-            ->get();
+        $cohorts = CohortQuery::forSchool($current_school_id)
+            ->get()
+            ->map(function ($cohort) {
+                $cohort->students_count = $cohort->users()->count();
+                return $cohort;
+            })
+            ->take(5);
 
         // Récupérer les 5 derniers enseignants et les promotions associées
-        $teachers = User::getUserByRole($current_school_id, 'teacher')
-            ->withCount('cohorts as cohorts_count')
-            ->take(5)
-            ->get();
+        $teachers = UserQuery::forSchool($current_school_id)->forRole('teacher')
+            ->get()
+            ->map(function ($teacher) {
+                $teacher->cohorts_count = $teacher->cohorts()->count();
+                return $teacher;
+            })
+            ->take(5);
 
         // Récupérer les 5 derniers étudiants    
-        $students = User::getUserByRole($current_school_id, 'student')
-            ->take(5)
-            ->get();
+        $students = UserQuery::forSchool($current_school_id)->forRole('student')
+            ->get()
+            ->take(5);
 
         return view('pages.dashboard.index', compact('cohorts', 'teachers', 'students'));
     }

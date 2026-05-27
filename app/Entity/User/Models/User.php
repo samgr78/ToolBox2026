@@ -2,7 +2,6 @@
 
 namespace App\Entity\User\Models;
 
-use App\Builders\UserBuilder;
 use App\Entity\Cohort\Models\Cohort;
 use App\Entity\Models\Ratings;
 use App\Entity\School\Models\School;
@@ -27,11 +26,6 @@ class User extends Authenticatable
         'current_school_id',
         'profile_photo_path',
     ];
-
-    public function newEloquentBuilder($query)
-    {
-        return new UserBuilder($query);
-    }
 
     protected $hidden = [
         'password',

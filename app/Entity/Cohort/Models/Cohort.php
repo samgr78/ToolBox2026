@@ -2,7 +2,6 @@
 
 namespace App\Entity\Cohort\Models;
 
-use App\Builders\CohortBuilder;
 use App\Entity\Cohort\Assessment;
 use App\Entity\Cohort\Task;
 use App\Entity\School\Models\School;
@@ -13,11 +12,6 @@ class Cohort extends Model
 {
     protected $table        = 'cohorts';
     protected $fillable     = ['school_id', 'name', 'description', 'start_date', 'end_date'];
-
-    public function newEloquentBuilder($query)
-    {
-        return new CohortBuilder($query);
-    }
 
     /**
      * Get all assessments associated with this cohort.

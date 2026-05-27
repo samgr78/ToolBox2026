@@ -4,6 +4,9 @@ namespace App\Entity\Profile\DTO;
 
 use App\Entity\Profile\Requests\ProfileRequest;
 
+/**
+ * Data Transfer Object représentant les données de mise à jour du profil.
+ */
 readonly class ProfileDTO
 {
     public function __construct(
@@ -14,6 +17,10 @@ readonly class ProfileDTO
     ) {
     }
 
+    /**
+     * Construit le DTO depuis une requête HTTP déjà validée.
+     * @param ProfileRequest $request  Requête validée
+     */
     public static function fromRequest(ProfileRequest $request): ProfileDTO
     {
         return new self(

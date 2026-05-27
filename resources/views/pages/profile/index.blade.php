@@ -72,8 +72,18 @@
                             <p class="text-sm text-gray-500">Pour assurer la sécurité de votre compte, utilisez un mot de passe complexe.</p>
 
                             <div class="flex flex-col gap-1">
+                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Mot de passe actuel</label>
+                                <x-forms.input name="current_password" type="password" placeholder="••••••••" required />
+                            </div>
+
+                            <div class="flex flex-col gap-1">
                                 <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Nouveau mot de passe</label>
                                 <x-forms.input name="password" type="password" placeholder="••••••••" required />
+                            </div>
+
+                            <div class="flex flex-col gap-1">
+                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Confirmer le nouveau mot de passe</label>
+                                <x-forms.input name="password_confirmation" type="password" placeholder="••••••••" required />
                             </div>
 
                             <div class="flex justify-end">

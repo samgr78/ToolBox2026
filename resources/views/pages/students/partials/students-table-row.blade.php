@@ -1,4 +1,4 @@
-<tr class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
+<tr data-user-id="{{ $user->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">>
     <td class="px-6 py-4">
         <div>
             <a href="{{ route('user.show', $user->id) }}"

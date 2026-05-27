@@ -11,7 +11,7 @@ class UpdateUserAction
 {
     public function execute(UserDTO $dto, User $user): array
     {
-        return DB::transaction(function () use ($dto){
+        return DB::transaction(function () use ($dto, $user) {
 
             $data = [
                 'last_name'  => $dto->last_name,

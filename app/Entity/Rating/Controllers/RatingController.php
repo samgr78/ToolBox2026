@@ -57,7 +57,8 @@ class RatingController extends Controller
         ]);
 
         try {
-            Excel::import(new UsersRateImport, $request->file('fichier_excel'));
+            $schoolId = auth()->user()->current_school_id;
+            Excel::import(new UsersRateImport($schoolId), $request->file('fichier_excel'));
             return back()->with('success', 'Import réussi!');
         } catch (\Exception $e) {
             return back()->with('error', 'Erreur lors de l\'import: ' . $e->getMessage());

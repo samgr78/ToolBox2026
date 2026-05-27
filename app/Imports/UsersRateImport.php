@@ -6,6 +6,7 @@ use App\Entity\User\Models\User;
 use App\Entity\Models\Ratings;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
@@ -15,6 +16,13 @@ use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
  */
 class UsersRateImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
 {
+    private $schoolId;
+
+    public function __construct($schoolId = null)
+    {
+        $this->schoolId = $schoolId ?? auth()->user()->current_school_id;
+    }
+
     public function collection(Collection $rows)
     {
         foreach ($rows as $row) {
@@ -37,6 +45,11 @@ class UsersRateImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                     'password'   => Hash::make('password123'),
                 ]
             );
+
+            // Ajouter l'utilisateur à la table users_schools avec le rôle 'student'
+            if (!$user->schools()->where('school_id', $this->schoolId)->exists()) {
+                $user->schools()->attach($this->schoolId, ['role' => 'student']);
+            }
 
             // Ajout de la note et l'associe à son utilisateur
             $note = Ratings::create([

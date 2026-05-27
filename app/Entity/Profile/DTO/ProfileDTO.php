@@ -4,7 +4,9 @@ namespace App\Entity\Profile\DTO;
 
 use App\Entity\Profile\Requests\ProfileRequest;
 
-//DTO pour transporter les données de mise à jour du profil
+/**
+ * Data Transfer Object représentant les données de mise à jour du profil.
+ */
 readonly class ProfileDTO
 {
     public function __construct(
@@ -12,10 +14,13 @@ readonly class ProfileDTO
         public string $first_name,
         public string $email,
         public ?string $password,
-        //public ?string $avatar,
     ) {
     }
 
+    /**
+     * Construit le DTO depuis une requête HTTP déjà validée.
+     * @param ProfileRequest $request  Requête validée
+     */
     public static function fromRequest(ProfileRequest $request): ProfileDTO
     {
         return new self(
@@ -23,7 +28,6 @@ readonly class ProfileDTO
             first_name: $request->input('first_name'),
             email: $request->input('email'),
             password: $request->input('password'),
-            //avatar: $request->input('avatar'),
         );
     }
 }

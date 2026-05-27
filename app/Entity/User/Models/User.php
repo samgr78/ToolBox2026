@@ -61,7 +61,7 @@ class User extends Authenticatable
     {
         return $this->profile_photo_path
             ? asset('storage/' . $this->profile_photo_path)
-            : asset('images/default-avatar.png');
+            : asset('images/user/owner.png');
     }
 
     public function schools()

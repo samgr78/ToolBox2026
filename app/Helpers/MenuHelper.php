@@ -13,11 +13,6 @@ class MenuHelper
                 'path' => '/dashboard',
             ],
             [
-                'icon' => 'calendar',
-                'name' => 'Calendrier',
-                'path' => '/calendar',
-            ],
-            [
                 'icon' => 'promotions',
                 'name' => 'Promotions',
                 'path' => '/cohort',

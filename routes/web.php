@@ -9,6 +9,7 @@ require __DIR__.'/web/user.php';
 require __DIR__.'/web/teacher.php';
 require __DIR__.'/web/student.php';
 require __DIR__.'/web/profile.php';
+require __DIR__.'/web/rating.php';
 
 Route::get('/', function () {
     return view('auth.login');

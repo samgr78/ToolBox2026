@@ -4,9 +4,8 @@ namespace App\Entity\User\Models;
 
 use App\Builders\UserBuilder;
 use App\Entity\Cohort\Models\Cohort;
+use App\Entity\Models\Ratings;
 use App\Entity\School\Models\School;
-use App\Entity\User\Assessment;
-use App\Entity\User\Task;
 use Database\Factories\Entity\User\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -97,5 +96,11 @@ class User extends Authenticatable
     public function hasRoleInSchool(string $role, int $schoolId): bool
     {
         return $this->roleInSchool($schoolId) === $role;
+    }
+
+    public function ratings()
+    {
+        return $this->belongsToMany(Ratings::class, 'users_ratings', 'user_id', 'rating_id')
+            ->withPivot('tests');
     }
 }

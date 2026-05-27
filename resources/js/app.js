@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (document.querySelector('#importForm')) {
-        import('./features/import-excel').then(module => module.initImportExcel());
+        import('./features/rating/import-excel.js').then(module => module.initImportExcel());
     }
 
     if(document.querySelector('.cohort-delete-form')){

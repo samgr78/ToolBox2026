@@ -3,9 +3,9 @@
 namespace App\Entity\Rating\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rating\ImportRatingRequest;
 use App\Imports\UsersRateImport;
 use App\Imports\UsersRatePreviewImport;
-use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RatingController extends Controller
@@ -14,11 +14,8 @@ class RatingController extends Controller
         return view('rating.index');
     }
 
-    public function preview(Request $request){
-        $request->validate([
-            'fichier_excel' => 'required|mimes:xlsx,csv'
-        ]);
-
+    public function preview(ImportRatingRequest $request)
+    {
         try {
             $import = new UsersRatePreviewImport();
             Excel::import($import, $request->file('fichier_excel'));
@@ -38,16 +35,20 @@ class RatingController extends Controller
         }
     }
 
-    public function import(Request $request){
-        $request->validate([
-            'fichier_excel' => 'required|mimes:xlsx,csv'
-        ]);
-
+    public function import(ImportRatingRequest $request)
+    {
         try {
             Excel::import(new UsersRateImport, $request->file('fichier_excel'));
-            return back()->with('success', 'Import réussi!');
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'Import réussi!'
+            ]);
         } catch (\Exception $e) {
-            return back()->with('error', 'Erreur lors de l\'import: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'message' => 'Erreur lors de l\'import: ' . $e->getMessage()
+            ], 400);
         }
     }
 

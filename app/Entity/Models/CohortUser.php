@@ -6,6 +6,9 @@ use App\Entity\Cohort\Models\Cohort;
 use App\Entity\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modèle représentant la table pivot cohort_user.
+ */
 class CohortUser extends Model
 {
     protected $table = 'cohort_user';
@@ -13,7 +16,7 @@ class CohortUser extends Model
     protected $fillable = ['user_id', 'cohort_id'];
 
     /**
-     * Get the user who created or owns this resource.
+     * Utilisateur rattaché à cette entrée de la table pivot.
      */
     public function user()
     {
@@ -21,7 +24,7 @@ class CohortUser extends Model
     }
 
     /**
-     * Get the cohort associated with this resource.
+     * Cohort rattachée à cette entrée de la table pivot.
      */
     public function cohort()
     {

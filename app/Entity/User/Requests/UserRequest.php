@@ -6,10 +6,13 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
+/**
+ * FormRequest gérant la validation des données utilisateur.
+ */
 class UserRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Détermine si l'utilisateur est autorisé à faire cette requête.
      */
     public function authorize(): bool
     {
@@ -17,9 +20,7 @@ class UserRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * Règles de validation pour les données utilisateur.
      */
     public function rules(): array
     {

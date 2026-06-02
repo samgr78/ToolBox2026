@@ -4,8 +4,12 @@ namespace App\Entity\User\DTO;
 
 use App\Entity\User\Requests\userRequest;
 
+/**
+ * Data Transfer Object représentant les données d'un utilisateur.
+ */
 readonly class UserDTO
 {
+    // Propriétés représentant les données d'un utilisateur
     public function __construct(
         public string $last_name,
         public string $first_name,
@@ -15,6 +19,7 @@ readonly class UserDTO
     ) {
     }
 
+    // Méthode statique pour créer un UserDTO à partir d'une requête utilisateur
     public static function fromRequest(userRequest $request): UserDTO
     {
         return new self(

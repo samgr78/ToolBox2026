@@ -6,6 +6,9 @@ use Database\Factories\Entity\School\SchoolFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modèle représentant un établissement scolaire.
+ */
 class School extends Model
 {
 

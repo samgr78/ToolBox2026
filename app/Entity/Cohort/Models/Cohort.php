@@ -47,5 +47,24 @@ class Cohort extends Model
         return $this->belongsTo(School::class);
     }
 
+    /**
+     * Get all students in this cohort (filtered by role).
+     */
+    public function students()
+    {
+        return $this->users->filter(function($user) {
+            return $user->roleInSchool($this->school_id) === 'student';
+        });
+    }
+
+    /**
+     * Get all teachers in this cohort (filtered by role).
+     */
+    public function teachers()
+    {
+        return $this->users->filter(function($user) {
+            return $user->roleInSchool($this->school_id) === 'teacher';
+        });
+    }
 
 }

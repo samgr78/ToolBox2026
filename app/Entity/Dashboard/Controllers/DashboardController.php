@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $cohorts = CohortQuery::forSchool($current_school_id)
             ->get()
             ->map(function ($cohort) {
-                $cohort->students_count = $cohort->users()->count();
+                $cohort->students_count = $cohort->students()->count();
                 return $cohort;
             })
             ->take(5);

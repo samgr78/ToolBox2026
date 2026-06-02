@@ -18,7 +18,7 @@
     </td>
 
     <td class="px-6 py-4 text-sm font-medium text-gray-700 dark:text-white ">
-        {{ $cohort->users_count ?? $cohort->users->count() }}
+        {{ $cohort->users_count ?? $cohort->students()->count() }}
     </td>
 
     <td class="px-6 py-4 flex gap-2">

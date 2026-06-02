@@ -8,13 +8,16 @@ use App\Entity\School\Models\School;
 use App\Entity\User\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Modèle représentant une cohort
+ */
 class Cohort extends Model
 {
     protected $table        = 'cohorts';
     protected $fillable     = ['school_id', 'name', 'description', 'start_date', 'end_date'];
 
     /**
-     * Get all assessments associated with this cohort.
+     * Évaluations rattachées à la cohort.
      */
     public function assessments()
     {
@@ -22,7 +25,7 @@ class Cohort extends Model
     }
 
     /**
-     * Get all users (students, etc.) belonging to this cohort.
+     * Tous les utilisateurs de la cohorte (étudiants, enseignants…) via la table pivot cohort_user.
      */
     public function users()
     {
@@ -30,7 +33,7 @@ class Cohort extends Model
     }
 
     /**
-     * Get all tasks linked to this cohort.
+     * Tâches rattachées à la cohort via la table pivot cohort_task.
      */
     public function tasks()
     {
@@ -42,13 +45,16 @@ class Cohort extends Model
         return $this->hasMany(Cohort::class);
     }
 
+    /**
+     * Établissement auquel appartient la cohort.
+     */
     public function school()
     {
         return $this->belongsTo(School::class);
     }
 
     /**
-     * Get all students in this cohort (filtered by role).
+     * Étudiants appartenant à cette cohort (filtrés par rôle).
      */
     public function students()
     {
@@ -58,7 +64,7 @@ class Cohort extends Model
     }
 
     /**
-     * Get all teachers in this cohort (filtered by role).
+     * Enseignants appartenant à cette cohort (filtrés par rôle).
      */
     public function teachers()
     {

@@ -4,10 +4,13 @@ namespace App\Entity\Cohort\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * FormRequest gérant la validation des données d'une cohort.
+ */
 class CohortRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Tout utilisateur authentifié peut soumettre ce formulaire.
      */
     public function authorize(): bool
     {
@@ -15,9 +18,7 @@ class CohortRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Règles de validation pour les champs d'une cohort.
      */
     public function rules(): array
     {

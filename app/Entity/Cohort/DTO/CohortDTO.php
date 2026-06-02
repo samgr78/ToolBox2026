@@ -4,8 +4,12 @@ namespace App\Entity\Cohort\DTO;
 
 use App\Entity\Cohort\Requests\cohortRequest;
 
+/**
+ * Data Transfer Object représentant les données d'une cohort.
+ */
 readonly class CohortDTO
 {
+    // Constructeur de la classe CohortDTO.
     public function __construct(
         public string $name,
         public string $description,
@@ -14,6 +18,7 @@ readonly class CohortDTO
     ) {
     }
 
+    // Construit le DTO depuis une requête déjà validée
     public static function fromRequest(cohortRequest $request): cohortDTO
     {
         return new self(

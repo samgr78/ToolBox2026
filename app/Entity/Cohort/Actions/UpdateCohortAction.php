@@ -10,7 +10,7 @@ use App\Entity\Cohort\Models\Cohort;
  */
 class UpdateCohortAction
 {
-    /// Met à jour les informations d'une cohort existante.
+    // Met à jour les informations d'une cohort existante.
     public function execute(CohortDTO $dto, Cohort $cohort): Cohort
     {
         $cohort->update([

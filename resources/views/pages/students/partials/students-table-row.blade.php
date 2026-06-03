@@ -1,18 +1,27 @@
 <tr data-user-id="{{ $user->id }}" class="hover:bg-gray-200 dark:hover:bg-gray-700 transition dark:text-white">
     <td class="px-6 py-4">
         <div>
-            <a href="{{ route('user.show', $user->id) }}"
-               class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
-                {{ $user->last_name }}
-            </a>
+            @can('view', $user)
+                <a href="{{ route('user.show', $user->id) }}"
+                   class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                    {{ $user->last_name }}
+                </a>
+            @else
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $user->last_name }}</span>
+            @endcan
         </div>
     </td>
 
     <td class="px-6 py-4">
         <div>
-            <a class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
-                {{ $user->first_name }}
-            </a>
+            @can('view', $user)
+                <a href="{{ route('user.show', $user->id) }}"
+                   class="text-sm font-semibold text-gray-900 hover:text-primary transition dark:text-white">
+                    {{ $user->first_name }}
+                </a>
+            @else
+                <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $user->first_name }}</span>
+            @endcan
         </div>
     </td>
 

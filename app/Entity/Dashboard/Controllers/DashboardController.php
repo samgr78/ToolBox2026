@@ -41,6 +41,7 @@ class DashboardController extends Controller
             ->get()
             ->take(5);
 
+        //  Vérifier si l'utilisateur connecté est un étudiant
         $isStudent = UserQuery::forSchool($current_school_id)
             ->userHasRole(auth()->user(), 'student');
 

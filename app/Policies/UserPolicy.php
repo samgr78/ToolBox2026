@@ -20,7 +20,7 @@ class UserPolicy
      */
     public function view(User $user, User $model): bool
     {
-        return $user->schools()
+        return $user->id === $model->id || $user->schools()
             ->wherePivotIn('role', ['admin', 'teacher'])
             ->exists();
     }

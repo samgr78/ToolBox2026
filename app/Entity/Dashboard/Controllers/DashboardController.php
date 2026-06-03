@@ -41,6 +41,9 @@ class DashboardController extends Controller
             ->get()
             ->take(5);
 
-        return view('pages.dashboard.index', compact('cohorts', 'teachers', 'students'));
+        $isStudent = UserQuery::forSchool($current_school_id)
+            ->userHasRole(auth()->user(), 'student');
+
+        return view('pages.dashboard.index', compact('cohorts', 'teachers', 'students', 'isStudent'));
     }
 }

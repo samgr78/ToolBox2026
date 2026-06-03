@@ -5,6 +5,7 @@ namespace App\Entity\Rating\Controllers;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersRateImport;
 use App\Imports\UsersRatePreviewImport;
+use App\Queries\UserQuery;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -17,11 +18,25 @@ class RatingController extends Controller
         return view('rating.index');
     }
 
+    protected function isStudentUser(): bool
+    {
+        $current_school_id = auth()->user()->current_school_id;
+
+        return UserQuery::forSchool($current_school_id)
+            ->userHasRole(auth()->user(), 'student');
+    }
+
     /**
      * Permet de prévisualiser le contenu d'un fichier Excel sans l'importer en bdd.
      * @param Request $request  Doit contenir 'fichier_excel' (xlsx ou csv)
      */
     public function preview(Request $request){
+        if ($this->isStudentUser()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Accès refusé.'
+            ], 403);
+        }
 
         // Validation pour éviter les uploads malveillants
         $request->validate([
@@ -52,6 +67,10 @@ class RatingController extends Controller
      * @param Request $request  Doit contenir 'fichier_excel' (xlsx ou csv)
      */
     public function import(Request $request){
+        if ($this->isStudentUser()) {
+            return back()->with('error', 'Accès refusé.');
+        }
+
         $request->validate([
             'fichier_excel' => 'required|mimes:xlsx,csv'
         ]);

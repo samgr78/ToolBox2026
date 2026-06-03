@@ -74,7 +74,6 @@ export function initUserForm() {
                 if (userId) {
                     updateTableRow(response.user, form);
                 } else {
-                    // Delete the empty row in the first insert
                     if (emptyRow) emptyRow.remove();
 
                     if(tbody) tbody.insertAdjacentHTML('beforeend', response.html);

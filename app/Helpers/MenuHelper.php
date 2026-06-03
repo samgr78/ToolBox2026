@@ -2,42 +2,59 @@
 
 namespace App\Helpers;
 
+use App\Queries\UserQuery;
+
 class MenuHelper
 {
     public static function getMainNavItems()
     {
-        return [
+        $current_school_id = auth()->user()->current_school_id;
+        $user = auth()->user();
+
+        $isStudent = UserQuery::forSchool($current_school_id)
+            ->userHasRole($user, 'student');
+
+        $items = [
             [
                 'icon' => 'dashboard',
                 'name' => 'Menu',
                 'path' => '/dashboard',
             ],
-            [
+        ];
+
+        if (!$isStudent) {
+            $items[] = [
                 'icon' => 'promotions',
                 'name' => 'Promotions',
                 'path' => '/cohort',
-            ],
-            [
-                'icon' => 'enseignants',
-                'name' => 'Enseignants',
-                'path' => '/teacher',
-            ],
-            [
-                'icon' => 'etudiants',
-                'name' => 'Étudiants',
-                'path' => '/student',
-            ],
-            [
-                'icon' => 'user-profile',
-                'name' => 'Profil',
-                'path' => '/profile',
-            ],
-            [
-                'icon' => 'deconnexion',
-                'name' => 'Déconnexion',
-                'path' => '/logout',
-            ]
+            ];
+        }
+
+        $items[] = [
+            'icon' => 'enseignants',
+            'name' => 'Enseignants',
+            'path' => '/teacher',
         ];
+
+        $items[] = [
+            'icon' => 'etudiants',
+            'name' => 'Étudiants',
+            'path' => '/student',
+        ];
+
+        $items[] = [
+            'icon' => 'user-profile',
+            'name' => 'Profil',
+            'path' => '/profile',
+        ];
+
+        $items[] = [
+            'icon' => 'deconnexion',
+            'name' => 'Déconnexion',
+            'path' => '/logout',
+        ];
+
+        return $items;
     }
 
     public static function getMenuGroups()

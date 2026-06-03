@@ -31,4 +31,12 @@ class UserQuery
     public function get() {
         return $this->query->get();
     }
+
+    public function userHasRole(User $user, string $role): bool
+    {
+        return $this->query
+            ->where('U.id', $user->id)
+            ->where('US.role', $role)
+            ->exists();
+    }
 }

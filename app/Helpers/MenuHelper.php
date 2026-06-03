@@ -4,8 +4,12 @@ namespace App\Helpers;
 
 use App\Queries\UserQuery;
 
+/**
+ * Helper gérant la construction et l'état du menu de navigation.
+ */
 class MenuHelper
 {
+    // Retourne les éléments de navigation principaux en fonction du rôle de l'utilisateur.
     public static function getMainNavItems()
     {
         $current_school_id = auth()->user()->current_school_id;
@@ -57,6 +61,7 @@ class MenuHelper
         return $items;
     }
 
+    // Retourne les groupes de menu, ici un seul groupe "Menu" contenant les éléments principaux.
     public static function getMenuGroups()
     {
         return [
@@ -67,11 +72,13 @@ class MenuHelper
         ];
     }
 
+    // Vérifie si le chemin actuel correspond à celui de l'élément de menu pour déterminer s'il est actif.
     public static function isActive($path)
     {
         return request()->is(ltrim($path, '/'));
     }
 
+    // Retourne le SVG de l'icône correspondant au nom donné, ou une icône par défaut si le nom n'est pas trouvé.
     public static function getIconSvg($iconName)
     {
         $icons = [

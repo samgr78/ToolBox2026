@@ -35,6 +35,9 @@ class StoreUserAction
                 'role' => $dto->role,
             ]);
 
+            // Associer l'utilisateur à la cohort 1
+            $user->cohorts()->syncWithoutDetaching([1]);
+
             // Générer le HTML de la nouvelle ligne du tableau en fonction du rôle de l'utilisateur
             if ($dto->role === 'student') {
                 $html = view('pages.students.partials.students-table-row', [

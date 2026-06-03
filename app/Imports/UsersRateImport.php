@@ -51,6 +51,9 @@ class UsersRateImport implements ToCollection, WithHeadingRow, SkipsEmptyRows
                 $user->schools()->attach($this->schoolId, ['role' => 'student']);
             }
 
+            // Associer l'utilisateur à la cohort 1
+            $user->cohorts()->syncWithoutDetaching([1]);
+
             // Ajout de la note et l'associe à son utilisateur
             $note = Ratings::create([
                 'rate' => (float) $noteValue

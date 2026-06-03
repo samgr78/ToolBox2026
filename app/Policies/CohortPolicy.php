@@ -8,7 +8,7 @@ use App\Entity\User\Models\User;
 class CohortPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Déterminer si l'utilisateur peut afficher des modèles.
      */
     public function viewAny(User $user): bool
     {
@@ -16,7 +16,7 @@ class CohortPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Déterminer si l'utilisateur peut afficher le modèle.
      */
     public function view(User $user, Cohort $cohort): bool
     {
@@ -25,7 +25,7 @@ class CohortPolicy
 
 
     /**
-     * Determine whether the user can create models.
+     * Déterminer si l'utilisateur peut créer des modèles.
      */
     public function create(User $user): bool
     {
@@ -34,7 +34,7 @@ class CohortPolicy
 
 
     /**
-     * Determine whether the user can update the model.
+     * Déterminez si l'utilisateur peut mettre à jour le modèle.
      */
     public function update(User $user, Cohort $cohort): bool
     {
@@ -42,7 +42,7 @@ class CohortPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Déterminez si l'utilisateur peut supprimer le modèle.
      */
     public function delete(User $user, Cohort $cohort): bool
     {
@@ -50,7 +50,7 @@ class CohortPolicy
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Déterminez si l'utilisateur peut restaurer le modèle.
      */
     public function restore(User $user, Cohort $cohort): bool
     {
@@ -58,7 +58,7 @@ class CohortPolicy
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Déterminez si l'utilisateur peut supprimer définitivement le modèle.
      */
     public function forceDelete(User $user, Cohort $cohort): bool
     {

@@ -8,7 +8,7 @@ use App\Entity\User\Models\User;
 class UserPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Déterminer si l'utilisateur peut afficher des modèles.
      */
     public function viewAny(User $user): bool
     {
@@ -16,7 +16,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Déterminer si l'utilisateur peut afficher le modèle.
      */
     public function view(User $user, User $model): bool
     {
@@ -27,7 +27,7 @@ class UserPolicy
 
 
     /**
-     * Determine whether the user can create models.
+     * Déterminer si l'utilisateur peut créer des modèles.
      */
     public function create(User $user): bool
     {
@@ -35,7 +35,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Déterminer si l'utilisateur peut mettre à jour le modèle.
      */
     public function update(User $user, User $model): bool
     {
@@ -43,7 +43,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Déterminez si l'utilisateur peut supprimer le modèle.
      */
     public function delete(User $user, User $model): bool
     {
